@@ -1,5 +1,6 @@
 import React from 'react'
 import SearchBar from '../common/SearchBar'
+import InsertUser from './InsertUser'
 import UserElement from './UserElement'
 
 const UsersList = () => {
@@ -22,11 +23,16 @@ const UsersList = () => {
         }
     ]
 
+    const filters = [
+        "clients", "administrators"
+    ]
+
     return (
         <div id="users_list">
             <div className='container'>
-                <div>
-                    <SearchBar />
+                <div style={{ display: "flex", justifyContent: "space-between" }}>
+                    <SearchBar filters={filters} />
+                    <InsertUser />
                 </div>
                 <div id="accordion">
                     {

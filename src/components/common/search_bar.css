@@ -1,0 +1,18 @@
+#search-bar {
+  padding-top: 1rem;
+  padding-bottom: 1rem;
+}
+
+#search-bar .search input {
+  -webkit-transition: all 1s;
+  transition: all 1s;
+  width: 150px;
+  padding: 0.5rem 0.5rem;
+}
+
+#search-bar .search input:focus {
+  -webkit-transition: all 1s;
+  transition: all 1s;
+  width: 220px;
+}
+/*# sourceMappingURL=search_bar.css.map */

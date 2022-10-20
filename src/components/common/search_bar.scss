@@ -1,0 +1,17 @@
+#search-bar {
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+
+    .search {
+        input {
+            transition: all 1s;
+            width: 150px;
+            padding: 0.5rem 0.5rem;
+
+            &:focus {
+                transition: all 1s;
+                width: 220px;
+            }
+        }
+    }
+}
