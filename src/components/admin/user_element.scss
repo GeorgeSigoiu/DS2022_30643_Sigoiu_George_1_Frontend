@@ -1,0 +1,47 @@
+.user-element {
+    .card {
+        position: relative;
+        margin-top: 1rem;
+
+        .card-content {
+            padding-left: 1rem;
+            padding-right: 1rem;
+            padding-top: 0.5rem;
+            padding-bottom: 0.5rem;
+            display: flex;
+            justify-content: space-between;
+
+            .name-field {
+                z-index: 5;
+                margin-top: auto;
+                margin-bottom: auto;
+                font-size: 25px;
+            }
+
+            .operation-field {
+                display: flex;
+                z-index: 10;
+
+                .icon {
+                    margin-top: auto;
+                    margin-bottom: auto;
+                    padding: 0.2rem;
+                    border-radius: 10px;
+                    margin-left: 5px;
+                    background-color: grey;
+                    cursor: pointer;
+                }
+            }
+        }
+
+        .expanded-info {
+            padding-left: 1rem;
+            overflow: hidden;
+
+            .info-input {
+                margin-top: 0.6rem;
+            }
+        }
+
+    }
+}

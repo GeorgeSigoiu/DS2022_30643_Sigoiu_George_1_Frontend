@@ -1,0 +1,9 @@
+{
+    "version": 3,
+    "mappings": "AAAA,AACI,QADI,CACJ,WAAW,CAAC;EACR,KAAK,EAAE,WAAW;EAClB,gBAAgB,EAAE,OAAgB;EAClC,aAAa,EAAE,GAAG;EAClB,MAAM,EAAE,WAAW;EACnB,MAAM,EAAE,eAAe;EACvB,OAAO,EAAE,WAAW;CACvB;;AARL,AAUI,QAVI,CAUJ,KAAK,CAAC;EACF,SAAS,EAAE,IAAI;EACf,WAAW,EAAE,GAAG;EAChB,MAAM,EAAE,OAAO;CAClB",
+    "sources": [
+        "user_sticker.scss"
+    ],
+    "names": [],
+    "file": "user_sticker.css"
+}

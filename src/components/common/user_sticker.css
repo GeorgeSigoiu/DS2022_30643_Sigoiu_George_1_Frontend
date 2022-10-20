@@ -1,0 +1,19 @@
+#sticker .container1 {
+  width: -webkit-fit-content;
+  width: -moz-fit-content;
+  width: fit-content;
+  background-color: #00ffea;
+  border-radius: 50%;
+  height: -webkit-fit-content;
+  height: -moz-fit-content;
+  height: fit-content;
+  border: 1px solid black;
+  padding: 0rem 0.5rem;
+}
+
+#sticker .text {
+  font-size: 30px;
+  font-weight: 900;
+  cursor: default;
+}
+/*# sourceMappingURL=user_sticker.css.map */

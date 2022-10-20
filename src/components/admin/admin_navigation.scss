@@ -1,0 +1,30 @@
+#admin-nav {
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+    background-color: #333;
+
+    .container {
+        display: flex;
+        justify-content: space-between;
+
+        .admin-operations {
+            margin-top: auto;
+            margin-bottom: auto;
+
+            ul {
+                list-style-type: none;
+                display: flex;
+                margin: 0;
+                padding: 0;
+
+                li {
+                    margin-left: 2rem;
+                    background-color: white;
+                    border-radius: 10px;
+                }
+            }
+        }
+
+    }
+
+}

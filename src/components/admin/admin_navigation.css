@@ -1,0 +1,35 @@
+#admin-nav {
+  padding-top: 1rem;
+  padding-bottom: 1rem;
+  background-color: #333;
+}
+
+#admin-nav .container {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+}
+
+#admin-nav .container .admin-operations {
+  margin-top: auto;
+  margin-bottom: auto;
+}
+
+#admin-nav .container .admin-operations ul {
+  list-style-type: none;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  margin: 0;
+  padding: 0;
+}
+
+#admin-nav .container .admin-operations ul li {
+  margin-left: 2rem;
+  background-color: white;
+  border-radius: 10px;
+}
+/*# sourceMappingURL=admin_navigation.css.map */
