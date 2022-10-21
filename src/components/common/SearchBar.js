@@ -5,9 +5,9 @@ const SearchBar = ({ filters }) => {
         <div id="search-bar">
             <div className='search'>
                 <input type="text" placeholder='Search...'></input>
-                <button type="button" className="btn btn-primary" style={{ marginLeft: "10px" }}>
+                <div type="button" className="btn btn-primary" style={{ marginLeft: "10px" }}>
                     <i className="fa-solid fa-magnifying-glass"></i>
-                </button>
+                </div>
             </div>
             <div className='filters' style={{ marginTop: "10px" }}>
                 <div type="button" className="btn btn-primary" data-bs-toggle="collapse" data-bs-target="#demo">Filters</div>

@@ -64,7 +64,7 @@ const UserElement = ({ user }) => {
                             </div>
                         </div>
                         <div style={{ marginTop: "auto", marginBottom: "auto", marginRight: "1rem" }}>
-                            <button type="button" className="btn btn-primary">Save</button>
+                            <div type="button" className="btn btn-primary">Save</div>
                         </div>
                     </div>
 

@@ -12,13 +12,13 @@ const AdminNavigation = () => {
                 <div className='admin-operations'>
                     <ul>
                         <li id="users-op">
-                            <button type="button" className="btn btn-outline-primary">users</button>
+                            <div type="button" className="btn btn-outline-primary">users</div>
                         </li>
                         <li id="devices-op">
-                            <button type="button" className="btn btn-outline-primary">devices</button>
+                            <div type="button" className="btn btn-outline-primary">devices</div>
                         </li>
                         <li id="logout-op">
-                            <button type="button" className="btn btn-outline-primary">log out</button>
+                            <div type="button" className="btn btn-outline-primary">log out</div>
                         </li>
                     </ul>
                 </div>

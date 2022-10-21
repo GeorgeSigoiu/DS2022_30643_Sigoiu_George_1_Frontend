@@ -1,6 +1,7 @@
 import React from 'react'
 
 const Modal = ({ modalId, title, content, btnMessage }) => {
+
     return (
         <div className="modal fade" id={modalId}>
             <div className="modal-dialog">
