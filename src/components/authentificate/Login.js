@@ -1,10 +1,14 @@
 import React from 'react'
 import './login.css'
+import { useNavigate } from 'react-router-dom';
 
 const Login = () => {
 
-    function check_input() {
+    const navigate = useNavigate();
 
+    function check_input() {
+        console.log("check input")
+        navigate("/admin");
     }
 
     return (

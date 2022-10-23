@@ -1,0 +1,21 @@
+.expanded-info-content {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+}
+
+.expanded-info-content .link-btn {
+  padding: 0.1rem 0.3rem;
+  margin-left: 10px;
+}
+
+.expanded-info-content .role-input .form-check input {
+  margin-top: 10px;
+  margin-left: 10px;
+  margin-right: 10px;
+  cursor: pointer;
+}
+/*# sourceMappingURL=expanded_info.css.map */

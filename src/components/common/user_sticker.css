@@ -1,14 +1,24 @@
-#sticker .container1 {
-  width: -webkit-fit-content;
-  width: -moz-fit-content;
-  width: fit-content;
+#sticker .container-image {
   background-color: #00ffea;
   border-radius: 50%;
-  height: -webkit-fit-content;
-  height: -moz-fit-content;
-  height: fit-content;
   border: 1px solid black;
   padding: 0rem 0.5rem;
+  width: 50px;
+  height: 50px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+#sticker .container-image img {
+  width: 40px;
+  height: 40px;
 }
 
 #sticker .text {

@@ -1,13 +1,17 @@
 import React from 'react'
 import AdminNavigation from './AdminNavigation'
-import UsersList from './UsersList'
 
-const AdminDashboard = () => {
+const AdminDashboard = ({ setUserType }) => {
+
+    setUserType("admin")
+
     return (
-        <div>
-            <AdminNavigation />
-            <UsersList />
-        </div>
+        <>
+            <div style={{ height: "200vh" }}>
+
+            </div>
+        </>
+
     )
 }
 

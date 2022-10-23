@@ -1,7 +1,15 @@
-import React from 'react'
+import React, { useState } from 'react'
+import Alert from '../common/Alert'
 import Modal from '../common/Modal'
 
 const InsertUser = () => {
+
+    const [requestStatus, setRequestStatus] = useState("")
+
+    function insertUser() {
+        console.log("insert user")
+        setRequestStatus("danger")
+    }
 
     return (
         <div id="insert-user" style={{ marginTop: "1rem", marginRight: "1rem" }}>
@@ -12,9 +20,16 @@ const InsertUser = () => {
             <Modal modalId={"myModal"} btnMessage={"Add"} title={"Add new user"} content={
                 (
                     <div>TODO FORM</div>
-
                 )
-            } />
+            } execute={insertUser} />
+            {
+                requestStatus !== "" &&
+                (
+                    < Alert type={requestStatus}
+                        message={requestStatus === "success" ? "User added successfully" : "Error adding the user"}
+                        setRequestStatus={setRequestStatus} />
+                )
+            }
         </div>
     )
 }

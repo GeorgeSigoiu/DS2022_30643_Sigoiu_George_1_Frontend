@@ -1,6 +1,6 @@
 import React from 'react'
 
-const Modal = ({ modalId, title, content, btnMessage }) => {
+const Modal = ({ modalId, title, content, btnMessage, execute }) => {
 
     return (
         <div className="modal fade" id={modalId}>
@@ -17,7 +17,7 @@ const Modal = ({ modalId, title, content, btnMessage }) => {
                     </div>
 
                     <div className="modal-footer">
-                        <button type="button" className="btn btn-success" data-bs-dismiss="modal">{btnMessage}</button>
+                        <button type="button" className="btn btn-success" data-bs-dismiss="modal" onClick={execute}>{btnMessage}</button>
                     </div>
 
                 </div>
