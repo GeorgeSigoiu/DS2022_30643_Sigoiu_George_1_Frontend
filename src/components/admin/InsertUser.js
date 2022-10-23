@@ -19,7 +19,26 @@ const InsertUser = () => {
             </div>
             <Modal modalId={"myModal"} btnMessage={"Add"} title={"Add new user"} content={
                 (
-                    <div>TODO FORM</div>
+                    <div>
+                        <div className='space-for-all-subdivs'>
+                            <div>
+                                Username: <input type="text" />
+                            </div>
+                            <div>
+                                Password: <input type="password" />
+                            </div>
+                            <div>
+                                Name: <input type="text" />
+                            </div>
+                            <div>
+                                Role:
+                                <select style={{ marginLeft: "10px" }}>
+                                    <option>client</option>
+                                    <option>administrator</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
                 )
             } execute={insertUser} />
             {

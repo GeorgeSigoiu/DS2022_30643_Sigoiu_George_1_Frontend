@@ -25,3 +25,7 @@ code {
 .d-inline-block {
   display: inline-block;
 }
+
+.space-for-all-subdivs>div {
+  margin-top: 10px
+}

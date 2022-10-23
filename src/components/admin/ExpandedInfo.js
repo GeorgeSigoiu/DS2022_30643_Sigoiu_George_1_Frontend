@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import Alert from '../common/Alert'
 import "./expanded_info.css"
+import Modal from '../common/Modal'
 
 const ExpandedInfo = ({ user }) => {
 
@@ -36,10 +37,21 @@ const ExpandedInfo = ({ user }) => {
 
     }
 
+    function credentialsModalAction(e) {
+        setRequestStatus("success")
+    }
+
     return (
         <div className='expanded-info hide-info collapse' id={`expanded-info-${user.id}`} data-bs-parent="#accordion" >
             <div className='expanded-info-content'>
                 <div>
+                    <div className='info-input credentials-info'>
+                        Credentials
+                        <div className='d-inline-block btn btn-outline-info' data-bs-toggle="modal" data-bs-target="#modalCredentials">
+                            <i className="fa-solid fa-arrow-up-right-from-square"></i>
+                        </div>
+
+                    </div>
                     <div className='info-input name-input'>
                         <label htmlFor="name" >Name</label>
                         <input type="text" name="name" defaultValue={user.name} style={{ marginLeft: "1rem", paddingLeft: "10px" }} />
@@ -109,6 +121,29 @@ const ExpandedInfo = ({ user }) => {
                         setRequestStatus={setRequestStatus} />
                 )
             }
+            <Modal modalId={"modalCredentials"} btnMessage={"Save"} title={"Change user credentials"} content={
+                (
+                    <div>
+                        <div>
+                            <div style={{ marginTop: "10px" }}>
+                                Username: <span>{user.name}</span>
+                            </div>
+                            <div style={{ marginTop: "10px", marginBottom: "10px" }}>
+                                Password: <span>{user.name}</span>
+                            </div>
+                        </div>
+                        <div style={{ height: "1px", backgroundColor: "black" }}></div>
+                        <div>
+                            <div style={{ marginTop: "10px" }}>
+                                New username: <input type="text" />
+                            </div>
+                            <div style={{ marginTop: "10px" }}>
+                                New password: <input type="password" />
+                            </div>
+                        </div>
+                    </div>
+                )
+            } execute={credentialsModalAction} />
         </div >
     )
 }
