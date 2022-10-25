@@ -1,14 +1,27 @@
 import React from 'react'
 import './login.css'
 import { useNavigate } from 'react-router-dom';
+import { login } from '../requests';
+import jwt_decode from "jwt-decode";
 
-const Login = () => {
+const Login = ({ setTokens, setUserType }) => {
 
     const navigate = useNavigate();
-
-    function check_input() {
+    setUserType("")
+    setTokens("")
+    async function check_input() {
         console.log("check input")
-        navigate("/admin");
+        const username = document.getElementById("username-input-field").value
+        const password = document.getElementById("password-input-field").value
+        const response = await login(username, password)
+        const access_token = response.access_token
+        const refresh_token = response.refresh_token
+
+        setTokens([access_token, refresh_token])
+        const decoded = jwt_decode(access_token)
+        const roles = decoded.roles
+        const role = roles[0]
+        navigate(`/${role}`)
     }
 
     return (
@@ -19,11 +32,11 @@ const Login = () => {
                         <div className="login">
                             <div className="login__field">
                                 <i className="login__icon fas fa-user"></i>
-                                <input type="text" className="login__input" placeholder="User name / Email" />
+                                <input type="text" id="username-input-field" className="login__input" placeholder="User name" />
                             </div>
                             <div className="login__field">
                                 <i className="login__icon fas fa-lock"></i>
-                                <input type="password" className="login__input" placeholder="Password" />
+                                <input type="password" id="password-input-field" className="login__input" placeholder="Password" />
                             </div>
                             <button className="button login__submit" onClick={check_input}>
                                 <span className="button__text">Log In Now</span>

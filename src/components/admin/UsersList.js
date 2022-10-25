@@ -4,7 +4,7 @@ import InsertUser from './InsertUser'
 import UserElement from './UserElement'
 import { getRequest, LINK_GET_USERS } from '../requests'
 
-const UsersList = () => {
+const UsersList = ({ tokens, setTokens }) => {
 
     const [users, setUsers] = useState([])
     const [once, doOnce] = useState(false)
@@ -20,8 +20,7 @@ const UsersList = () => {
 
 
     async function getUsers() {
-        const access_token = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJnaWNhIiwicm9sZXMiOlsiYWRtaW4iXSwiaXNzIjoiaHR0cDovL2xvY2FsaG9zdDo3OTAwL2xvZ2luIiwiZXhwIjoxNjY2NjM3NDM5fQ.8EEqLMgr2hR7viqLBYVTxrKo4x_ts1xKBTkhNJc2M4k"
-        const data = await getRequest(LINK_GET_USERS, access_token)
+        const data = await getRequest(LINK_GET_USERS, tokens[0])
         setUsers(data)
     }
 
@@ -34,12 +33,12 @@ const UsersList = () => {
             <div className='container'>
                 <div style={{ display: "flex", justifyContent: "space-between" }}>
                     <SearchBar filters={filters} />
-                    <InsertUser />
+                    <InsertUser tokens={tokens} setTokens={setTokens} users={users} setUsers={setUsers} />
                 </div>
                 <div id="accordion">
                     {
                         users.map((el, index) => (
-                            <UserElement user={el} key={index} />
+                            <UserElement user={el} key={index} tokens={tokens} setTokens={setTokens} users={users} setUsers={setUsers} />
                         ))
                     }
                 </div>

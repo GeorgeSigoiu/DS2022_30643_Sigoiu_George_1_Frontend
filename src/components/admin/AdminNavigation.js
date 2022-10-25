@@ -21,6 +21,11 @@ const AdminNavigation = ({ setUserType }) => {
                     <div className='admin-operations'>
                         <ul>
                             <li id="users-op">
+                                <Link to="/admin/settings">
+                                    <div type="button" className="btn btn-outline-primary">settings</div>
+                                </Link>
+                            </li>
+                            <li id="users-op">
                                 <Link to="/admin/users">
                                     <div type="button" className="btn btn-outline-primary">users</div>
                                 </Link>

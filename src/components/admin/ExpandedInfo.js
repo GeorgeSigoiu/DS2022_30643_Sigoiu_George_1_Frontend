@@ -2,13 +2,33 @@ import React, { useState } from 'react'
 import Alert from '../common/Alert'
 import "./expanded_info.css"
 import Modal from '../common/Modal'
+import { getRequest, LINK_PUT_USER, putRequest, LINK_GET_CREDENTIALS_ID, LINK_PUT_CREDENTIALS } from '../requests'
 
-const ExpandedInfo = ({ user }) => {
+const ExpandedInfo = ({ user, users, setUsers, tokens, setTokens }) => {
 
     const [requestStatus, setRequestStatus] = useState("")
 
-    function executeSave() {
+    //todo for devices
+    async function executeSave() {
         console.log("save user info")
+        const name = document.getElementById(`name-input-${user.id}`).value
+        const checkInput = document.getElementById(`check-role-input-${user.id}`)
+        let role
+        if (checkInput.checked === true) {
+            role = "admin"
+        } else {
+            role = "client"
+        }
+        const payload = {
+            "name": name,
+            "role": role
+        }
+        const newUser = await putRequest(LINK_PUT_USER, user.id, payload, tokens[0])
+        console.log("new user: ", newUser)
+        const newUserList = users.filter((el) => el.id !== user.id)
+        const index = users.indexOf(user)
+        newUserList.splice(index, 0, newUser)
+        setUsers([...newUserList])
         setRequestStatus("success")
     }
 
@@ -37,8 +57,27 @@ const ExpandedInfo = ({ user }) => {
 
     }
 
-    function credentialsModalAction(e) {
-        setRequestStatus("success")
+    async function credentialsModalAction(e) {
+        const newUsername = document.getElementById(`change-username-${user.id}`).value
+        document.getElementById(`change-username-${user.id}`).value = ""
+        const newPassword = document.getElementById(`change-password-${user.id}`).value
+        document.getElementById(`change-password-${user.id}`).value = ""
+        try {
+            const credentialsId = await getRequest(LINK_GET_CREDENTIALS_ID + user.id, tokens[0])
+            console.log("credentials id: ", credentialsId)
+            const credentials = {
+                id: credentialsId,
+                username: newUsername,
+                password: newPassword
+            }
+            console.log("payload for credentials update: ", credentials)
+            const newCredentials = await putRequest(LINK_PUT_CREDENTIALS, credentialsId, credentials, tokens[0])
+            setRequestStatus("success")
+        } catch (exception) {
+            console.log(exception)
+            setRequestStatus("danger")
+        }
+
     }
 
     return (
@@ -47,14 +86,14 @@ const ExpandedInfo = ({ user }) => {
                 <div>
                     <div className='info-input credentials-info'>
                         Credentials
-                        <div className='d-inline-block btn btn-outline-info' data-bs-toggle="modal" data-bs-target="#modalCredentials">
+                        <div className='d-inline-block btn btn-outline-info' data-bs-toggle="modal" data-bs-target={`#modalCredentials-${user.id}`}>
                             <i className="fa-solid fa-arrow-up-right-from-square"></i>
                         </div>
 
                     </div>
                     <div className='info-input name-input'>
                         <label htmlFor="name" >Name</label>
-                        <input type="text" name="name" defaultValue={user.name} style={{ marginLeft: "1rem", paddingLeft: "10px" }} />
+                        <input id={`name-input-${user.id}`} type="text" name="name" defaultValue={user.name} style={{ marginLeft: "1rem", paddingLeft: "10px" }} />
                     </div>
                     <div className='info-input role-input'>
                         <label >Role</label>
@@ -67,17 +106,19 @@ const ExpandedInfo = ({ user }) => {
                                 {
                                     user.role === "client" && (<input
                                         className="form-check-input"
-                                        type="checkbox" />)
+                                        type="checkbox"
+                                        id={`check-role-input-${user.id}`} />)
                                 }
                                 {
-                                    user.role === "administrator" && (<input
+                                    user.role === "admin" && (<input
                                         className="form-check-input"
                                         type="checkbox"
-                                        defaultChecked />)
+                                        defaultChecked
+                                        id={`check-role-input-${user.id}`} />)
                                 }
                             </div>
                             <div className='administrator-text d-inline-block' >
-                                administrator
+                                admin
                             </div>
                         </div>
                     </div>
@@ -121,7 +162,7 @@ const ExpandedInfo = ({ user }) => {
                         setRequestStatus={setRequestStatus} />
                 )
             }
-            <Modal modalId={"modalCredentials"} btnMessage={"Save"} title={"Change user credentials"} content={
+            <Modal modalId={`modalCredentials-${user.id}`} btnMessage={"Save"} title={"Change user credentials"} content={
                 (
                     <div>
                         <div>
@@ -129,16 +170,16 @@ const ExpandedInfo = ({ user }) => {
                                 Username: <span>{user.name}</span>
                             </div>
                             <div style={{ marginTop: "10px", marginBottom: "10px" }}>
-                                Password: <span>{user.name}</span>
+                                Password: <span>????</span>
                             </div>
                         </div>
                         <div style={{ height: "1px", backgroundColor: "black" }}></div>
                         <div>
                             <div style={{ marginTop: "10px" }}>
-                                New username: <input type="text" />
+                                New username: <input type="text" id={`change-username-${user.id}`} />
                             </div>
                             <div style={{ marginTop: "10px" }}>
-                                New password: <input type="password" />
+                                New password: <input type="password" id={`change-password-${user.id}`} />
                             </div>
                         </div>
                     </div>

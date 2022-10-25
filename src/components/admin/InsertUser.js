@@ -1,14 +1,39 @@
 import React, { useState } from 'react'
 import Alert from '../common/Alert'
 import Modal from '../common/Modal'
+import { insertUser } from '../requests'
 
-const InsertUser = () => {
+const InsertUser = ({ tokens, setTokens, users, setUsers }) => {
 
     const [requestStatus, setRequestStatus] = useState("")
 
-    function insertUser() {
+    async function insertUserAction() {
         console.log("insert user")
-        setRequestStatus("danger")
+        const username = document.getElementById("creation-username").value
+        document.getElementById("creation-username").value = ""
+        const password = document.getElementById("creation-password").value
+        document.getElementById("creation-password").value = ""
+        const name = document.getElementById("creation-name").value
+        document.getElementById("creation-name").value = ""
+        const select = document.getElementById("creation-role")
+        const role = select.options[select.selectedIndex].innerHTML
+        const userToInsert = {
+            name: name,
+            password: password,
+            username: username,
+            role: role
+        }
+        try {
+            const newUser = await insertUser(userToInsert, tokens[0])
+            setUsers([...users, newUser])
+            console.log(username, password, name, role)
+            setRequestStatus("success")
+        } catch (exception) {
+            alert(exception)
+            setRequestStatus("danger")
+        }
+
+
     }
 
     return (
@@ -22,25 +47,25 @@ const InsertUser = () => {
                     <div>
                         <div className='space-for-all-subdivs'>
                             <div>
-                                Username: <input type="text" />
+                                Username: <input type="text" id="creation-username" />
                             </div>
                             <div>
-                                Password: <input type="password" />
+                                Password: <input type="password" id="creation-password" />
                             </div>
                             <div>
-                                Name: <input type="text" />
+                                Name: <input type="text" id="creation-name" />
                             </div>
                             <div>
                                 Role:
-                                <select style={{ marginLeft: "10px" }}>
+                                <select style={{ marginLeft: "10px" }} id="creation-role">
                                     <option>client</option>
-                                    <option>administrator</option>
+                                    <option>admin</option>
                                 </select>
                             </div>
                         </div>
                     </div>
                 )
-            } execute={insertUser} />
+            } execute={insertUserAction} />
             {
                 requestStatus !== "" &&
                 (

@@ -1,14 +1,16 @@
 import React from 'react'
-import AdminNavigation from './AdminNavigation'
 
-const AdminDashboard = ({ setUserType }) => {
-
-    setUserType("admin")
+const AdminDashboard = ({ tokens, setTokens }) => {
 
     return (
         <>
             <div style={{ height: "200vh" }}>
-
+                <div style={{ width: "500px", overflow: "auto" }}>
+                    {tokens[0]}
+                </div>
+                <div style={{ width: "500px", overflow: "auto" }}>
+                    {tokens[1]}
+                </div>
             </div>
         </>
 

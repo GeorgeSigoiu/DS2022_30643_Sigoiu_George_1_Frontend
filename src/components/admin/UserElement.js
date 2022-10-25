@@ -3,14 +3,31 @@ import Modal from '../common/Modal'
 import ExpandedInfo from './ExpandedInfo'
 import './user_element.css'
 import Alert from '../common/Alert'
+import { deleteRequest, LINK_DELETE_USER } from '../requests'
 
-const UserElement = ({ user }) => {
+const UserElement = ({ user, tokens, setTokens, users, setUsers }) => {
 
     const [requestStatus, setRequestStatus] = useState("")
 
-    function execute() {
+    async function executeDelete() {
         console.log("delete user")
-        setRequestStatus("success")
+        const access_token = tokens[0]
+        const userId = user.id
+        try {
+            const responseStatus = await deleteRequest(LINK_DELETE_USER, userId, access_token)
+            console.log(responseStatus)
+            if (responseStatus >= 200 && responseStatus < 300) {
+                setRequestStatus("success")
+                const newListUsers = users.filter((el) => el.id !== userId)
+                setUsers([...newListUsers])
+            } else {
+                setRequestStatus("danger")
+            }
+        } catch (exception) {
+            alert(exception)
+            setRequestStatus("danger")
+        }
+
     }
 
     return (
@@ -34,7 +51,7 @@ const UserElement = ({ user }) => {
 
                     </div>
                 </div>
-                <ExpandedInfo user={user} />
+                <ExpandedInfo user={user} tokens={tokens} setTokens={setTokens} users={users} setUsers={setUsers} />
             </div>
 
             <Modal type="alert"
@@ -42,7 +59,7 @@ const UserElement = ({ user }) => {
                 content={`${user.name}`}
                 modalId={`myModal-${user.id}`}
                 btnMessage={"Yes, delete"}
-                execute={execute} />
+                execute={executeDelete} />
             {
                 requestStatus !== "" &&
                 (
