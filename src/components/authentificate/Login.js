@@ -9,6 +9,7 @@ const Login = ({ setTokens, setUserType }) => {
     const navigate = useNavigate();
     setUserType("")
     setTokens("")
+
     async function check_input() {
         console.log("check input")
         const username = document.getElementById("username-input-field").value
@@ -24,6 +25,12 @@ const Login = ({ setTokens, setUserType }) => {
         navigate(`/${role}`)
     }
 
+    function loginOnEnterPressed(e) {
+        if (e.code === "Enter") {
+            check_input()
+        }
+    }
+
     return (
         <div id="login-page">
             <div className="container">
@@ -36,7 +43,7 @@ const Login = ({ setTokens, setUserType }) => {
                             </div>
                             <div className="login__field">
                                 <i className="login__icon fas fa-lock"></i>
-                                <input type="password" id="password-input-field" className="login__input" placeholder="Password" />
+                                <input type="password" id="password-input-field" className="login__input" placeholder="Password" onKeyDown={e => loginOnEnterPressed(e)} />
                             </div>
                             <button className="button login__submit" onClick={check_input}>
                                 <span className="button__text">Log In Now</span>

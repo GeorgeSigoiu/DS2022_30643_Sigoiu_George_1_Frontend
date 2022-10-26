@@ -29,13 +29,13 @@ const UsersList = ({ tokens, setTokens }) => {
     ]
 
     return (
-        <div id="users_list">
+        <div id="users_list" style={{ marginBottom: "2rem" }}>
             <div className='container'>
                 <div style={{ display: "flex", justifyContent: "space-between" }}>
                     <SearchBar filters={filters} />
                     <InsertUser tokens={tokens} setTokens={setTokens} users={users} setUsers={setUsers} />
                 </div>
-                <div id="accordion">
+                <div id="accordion-users">
                     {
                         users.map((el, index) => (
                             <UserElement user={el} key={index} tokens={tokens} setTokens={setTokens} users={users} setUsers={setUsers} />

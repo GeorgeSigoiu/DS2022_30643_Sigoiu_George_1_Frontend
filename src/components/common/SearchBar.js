@@ -23,7 +23,7 @@ const SearchBar = ({ filters }) => {
 
                 </div>
             </div>
-        </div>
+        </div >
     )
 }
 

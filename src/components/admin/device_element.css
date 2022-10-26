@@ -1,0 +1,45 @@
+.device-element .card {
+  position: relative;
+  margin-top: 1rem;
+}
+
+.device-element .card .card-content {
+  padding-left: 1rem;
+  padding-right: 1rem;
+  padding-top: 0.5rem;
+  padding-bottom: 0.5rem;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+}
+
+.device-element .card .card-content .info-field {
+  z-index: 5;
+  margin-top: auto;
+  margin-bottom: auto;
+}
+
+.device-element .card .card-content .info-field div {
+  width: 900px;
+  max-height: 120px;
+  overflow-y: auto;
+}
+
+.device-element .card .card-content .operation-field {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  z-index: 10;
+}
+
+.device-element .card .card-content .operation-field .icon {
+  margin-top: auto;
+  margin-bottom: auto;
+  padding: 0.2rem 0.7rem;
+  border-radius: 10px;
+  margin-left: 5px;
+}
+/*# sourceMappingURL=device_element.css.map */

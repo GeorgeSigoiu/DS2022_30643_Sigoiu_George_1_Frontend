@@ -62,6 +62,7 @@ const ExpandedInfo = ({ user, users, setUsers, tokens, setTokens }) => {
         document.getElementById(`change-username-${user.id}`).value = ""
         const newPassword = document.getElementById(`change-password-${user.id}`).value
         document.getElementById(`change-password-${user.id}`).value = ""
+
         try {
             const credentialsId = await getRequest(LINK_GET_CREDENTIALS_ID + user.id, tokens[0])
             console.log("credentials id: ", credentialsId)
@@ -77,11 +78,10 @@ const ExpandedInfo = ({ user, users, setUsers, tokens, setTokens }) => {
             console.log(exception)
             setRequestStatus("danger")
         }
-
     }
 
     return (
-        <div className='expanded-info hide-info collapse' id={`expanded-info-${user.id}`} data-bs-parent="#accordion" >
+        <div className='expanded-info hide-info collapse' id={`expanded-info-${user.id}`} data-bs-parent="#accordion-users" >
             <div className='expanded-info-content'>
                 <div>
                     <div className='info-input credentials-info'>
@@ -167,16 +167,16 @@ const ExpandedInfo = ({ user, users, setUsers, tokens, setTokens }) => {
                     <div>
                         <div>
                             <div style={{ marginTop: "10px" }}>
-                                Username: <span>{user.name}</span>
+                                Old username: <span>{user.credentials.username}</span>
                             </div>
                             <div style={{ marginTop: "10px", marginBottom: "10px" }}>
-                                Password: <span>????</span>
+                                Old password: <span>{user.credentials.password}</span>
                             </div>
                         </div>
                         <div style={{ height: "1px", backgroundColor: "black" }}></div>
                         <div>
                             <div style={{ marginTop: "10px" }}>
-                                New username: <input type="text" id={`change-username-${user.id}`} />
+                                New username: <input type="text" id={`change-username-${user.id}`} defaultValue={user.credentials.username} />
                             </div>
                             <div style={{ marginTop: "10px" }}>
                                 New password: <input type="password" id={`change-password-${user.id}`} />

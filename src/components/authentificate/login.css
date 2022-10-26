@@ -7,7 +7,7 @@
   font-family: Raleway, sans-serif;
 }
 
-#login-page body {
+body {
   background: -webkit-gradient(linear, left top, right top, from(#C7C5F4), to(#776BCC));
   background: linear-gradient(90deg, #C7C5F4, #776BCC);
 }
@@ -22,7 +22,7 @@
   -webkit-box-pack: center;
       -ms-flex-pack: center;
           justify-content: center;
-  min-height: 100vh;
+  height: 100vh;
 }
 
 #login-page .screen {
