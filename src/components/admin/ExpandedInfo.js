@@ -4,7 +4,7 @@ import "./expanded_info.css"
 import Modal from '../common/Modal'
 import { getRequest, LINK_PUT_USER, putRequest, LINK_GET_CREDENTIALS_ID, LINK_PUT_CREDENTIALS } from '../requests'
 
-const ExpandedInfo = ({ user, users, setUsers, tokens, setTokens }) => {
+const ExpandedInfo = ({ user, users, setUsers, tokens, setTokens, devices, setDevices }) => {
 
     const [requestStatus, setRequestStatus] = useState("")
 
@@ -54,7 +54,17 @@ const ExpandedInfo = ({ user, users, setUsers, tokens, setTokens }) => {
     }
 
     function makeCorrelation(e) {
-
+        const input = document.getElementById(`input-for-datalist-${user.id}`)
+        const inputValue = input.value
+        input.value = ""
+        console.log(inputValue)
+        const theDevice = devices.filter((el) => el.address === inputValue)
+        console.log(theDevice[0])
+        if (theDevice[0] === null || theDevice[0] === undefined) {
+            alert("The value does not correspound to a valid address")
+            return
+        }
+        //add the device to the user
     }
 
     async function credentialsModalAction(e) {
@@ -124,16 +134,16 @@ const ExpandedInfo = ({ user, users, setUsers, tokens, setTokens }) => {
                     </div>
                     <div className='info-input devices-input'>
                         Devices:
-                        <input list="all-devices-list" type="text" style={{ marginLeft: "10px", paddingLeft: "10px" }} ></input>
+                        <input id={`input-for-datalist-${user.id}`} list="all-devices-list" type="text" style={{ marginLeft: "10px", paddingLeft: "10px" }} ></input>
                         <div className='btn btn-success link-btn d-inline-block' onClick={e => makeCorrelation(e)}>
                             <i className="fa-sharp fa-solid fa-link"></i>
                         </div>
                         <datalist id="all-devices-list">
-                            <option>Volvo</option>
-                            <option>Audi</option>
-                            <option>Asteron</option>
-                            <option>Volskwagen</option>
-                            <option>Mercedes-Benz</option>
+                            {
+                                devices.map((el, index) => (
+                                    <option key={index}>{el.address}</option>
+                                ))
+                            }
                         </datalist>
                         <div className='devices-list' style={{ marginBottom: "1rem", marginTop: "0.5rem" }}>
                             {

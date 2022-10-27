@@ -2,11 +2,12 @@ import React, { useState, useEffect } from 'react'
 import SearchBar from '../common/SearchBar'
 import InsertUser from './InsertUser'
 import UserElement from './UserElement'
-import { getRequest, LINK_GET_USERS } from '../requests'
+import { getRequest, LINK_GET_DEVICES_WITHOUT_OWNER, LINK_GET_USERS } from '../requests'
 
 const UsersList = ({ tokens, setTokens }) => {
 
     const [users, setUsers] = useState([])
+    const [devices, setDevices] = useState([])
     const [once, doOnce] = useState(false)
 
     useEffect(() => {
@@ -15,6 +16,7 @@ const UsersList = ({ tokens, setTokens }) => {
 
     useEffect(() => {
         getUsers()
+        getDevices()
         console.log("getUsers()")
     }, [once])
 
@@ -22,6 +24,11 @@ const UsersList = ({ tokens, setTokens }) => {
     async function getUsers() {
         const data = await getRequest(LINK_GET_USERS, tokens[0])
         setUsers(data)
+    }
+
+    async function getDevices() {
+        const data = await getRequest(LINK_GET_DEVICES_WITHOUT_OWNER, tokens[0])
+        setDevices(data)
     }
 
     const filters = [
@@ -38,7 +45,7 @@ const UsersList = ({ tokens, setTokens }) => {
                 <div id="accordion-users">
                     {
                         users.map((el, index) => (
-                            <UserElement user={el} key={index} tokens={tokens} setTokens={setTokens} users={users} setUsers={setUsers} />
+                            <UserElement user={el} key={index} tokens={tokens} setTokens={setTokens} users={users} setUsers={setUsers} devices={devices} setDevices={setDevices} />
                         ))
                     }
                 </div>

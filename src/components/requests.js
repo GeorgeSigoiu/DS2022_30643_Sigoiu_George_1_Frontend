@@ -4,6 +4,7 @@ export const LINK_GET_USERS = "http://localhost:7900/get/users"
 export const LINK_GET_CREDENTIALS_ID = "http://localhost:7900/get/credentials-id/user-id="
 export const LINK_GET_CREDENTIALS = "http://localhost:7900/get/credentials-id/user-id="
 export const LINK_GET_DEVICES = "http://localhost:7900/get/devices"
+export const LINK_GET_DEVICES_WITHOUT_OWNER = "http://localhost:7900/get/devices/no-owner"
 
 export const LINK_ADD_USER = "http://localhost:7900/add/user"
 export const LINK_ADD_CREDENTIALS = "http://localhost:7900/add/credentials"

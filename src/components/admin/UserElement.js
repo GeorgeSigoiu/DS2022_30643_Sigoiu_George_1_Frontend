@@ -5,7 +5,7 @@ import './user_element.css'
 import Alert from '../common/Alert'
 import { deleteRequest, LINK_DELETE_USER } from '../requests'
 
-const UserElement = ({ user, tokens, setTokens, users, setUsers }) => {
+const UserElement = ({ user, tokens, setTokens, users, setUsers, devices, setDevices }) => {
 
     const [requestStatus, setRequestStatus] = useState("")
 
@@ -51,7 +51,7 @@ const UserElement = ({ user, tokens, setTokens, users, setUsers }) => {
 
                     </div>
                 </div>
-                <ExpandedInfo user={user} tokens={tokens} setTokens={setTokens} users={users} setUsers={setUsers} />
+                <ExpandedInfo user={user} tokens={tokens} setTokens={setTokens} users={users} setUsers={setUsers} devices={devices} setDevices={setDevices} />
             </div>
 
             <Modal type="alert"
