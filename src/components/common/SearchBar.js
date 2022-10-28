@@ -1,11 +1,17 @@
 import React from 'react'
+import { tryRefreshTokens } from '../requests'
 import "./search_bar.css"
-const SearchBar = ({ filters }) => {
+const SearchBar = ({ filters, tokens }) => {
+
+    async function myF() {
+
+    }
+
     return (
         <div id="search-bar">
             <div className='search'>
                 <input type="text" placeholder='Search...'></input>
-                <div type="button" className="btn btn-primary" style={{ marginLeft: "10px" }}>
+                <div type="button" className="btn btn-primary" style={{ marginLeft: "10px" }} onClick={myF}>
                     <i className="fa-solid fa-magnifying-glass"></i>
                 </div>
             </div>
