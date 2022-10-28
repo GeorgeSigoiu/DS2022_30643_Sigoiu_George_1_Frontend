@@ -12,6 +12,19 @@ body {
   background: linear-gradient(90deg, #C7C5F4, #776BCC);
 }
 
+#login-page {
+  position: relative;
+}
+
+#login-page .alert {
+  margin-top: 2rem;
+  position: absolute;
+  top: 0%;
+  left: 50%;
+  -webkit-transform: translateX(-50%);
+          transform: translateX(-50%);
+}
+
 #login-page .container {
   display: -webkit-box;
   display: -ms-flexbox;

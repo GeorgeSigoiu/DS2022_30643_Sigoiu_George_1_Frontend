@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import './login.css'
 import { useNavigate } from 'react-router-dom';
 import { login } from '../requests';
@@ -9,6 +9,15 @@ const Login = ({ setTokens, setUserType }) => {
     const navigate = useNavigate();
     setUserType("")
     setTokens("")
+
+    const [showAlert, setShowAlert] = useState(false)
+
+    useEffect(() => {
+        const current_url = window.location.href
+        if (current_url.endsWith("session_expired")) {
+            setShowAlert(true)
+        }
+    }, [showAlert])
 
     async function check_input() {
         console.log("check input")
@@ -33,6 +42,12 @@ const Login = ({ setTokens, setUserType }) => {
 
     return (
         <div id="login-page">
+            {
+                showAlert && (<div className="alert alert-danger alert-dismissible">
+                    <button type="button" className="btn-close" data-bs-dismiss="alert"></button>
+                    <strong>Attention!</strong> Your session has expired, log in again to continue
+                </div>)
+            }
             <div className="container">
                 <div className="screen">
                     <div className="screen__content">
