@@ -20,7 +20,7 @@ const DevicesList = ({ tokens, setTokens }) => {
 
 
     async function getDevices() {
-        const data = await getRequest(LINK_GET_DEVICES, tokens[0])
+        const data = await getRequest(LINK_GET_DEVICES, tokens[0], {})
         setDevices(data)
         console.log(data)
     }

@@ -12,7 +12,7 @@ const DeviceElement = ({ device, tokens, setTokens, devices, setDevices }) => {
         console.log("delete device")
         const deviceId = device.id
         try {
-            const responseStatus = await deleteRequest(LINK_DELETE_DEVICE, deviceId, tokens[0])
+            const responseStatus = await deleteRequest(LINK_DELETE_DEVICE + deviceId, tokens[0], null)
             console.log(responseStatus)
             if (responseStatus >= 200 && responseStatus < 300) {
                 setRequestStatus("success")
@@ -38,7 +38,7 @@ const DeviceElement = ({ device, tokens, setTokens, devices, setDevices }) => {
             maxHourlyEnergyConsumption: consumption
         }
         try {
-            const newDevice = await putRequest(LINK_PUT_DEVICE, device.id, payload, tokens[0])
+            const newDevice = await putRequest(LINK_PUT_DEVICE + device.id, tokens[0], payload)
             const index = devices.indexOf(device)
             const newDevicesList = devices.filter((el) => el.id !== device.id)
             newDevicesList.splice(index, 0, newDevice)

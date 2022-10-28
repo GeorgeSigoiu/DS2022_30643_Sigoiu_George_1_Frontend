@@ -2,13 +2,25 @@ import React, { useState } from 'react'
 import Alert from '../common/Alert'
 import "./expanded_info.css"
 import Modal from '../common/Modal'
-import { getRequest, LINK_PUT_USER, putRequest, LINK_GET_CREDENTIALS_ID, LINK_PUT_CREDENTIALS } from '../requests'
+import { getRequest, LINK_PUT_USER, putRequest, LINK_GET_CREDENTIALS_ID, LINK_PUT_CREDENTIALS, LINK_ADD_DEVICE_TO_USER, LINK_GET_USER, LINK_UPDATE_DEVICES_USER, LINK_GET_DEVICES_WITHOUT_OWNER } from '../requests'
 
 const ExpandedInfo = ({ user, users, setUsers, tokens, setTokens, devices, setDevices }) => {
 
     const [requestStatus, setRequestStatus] = useState("")
 
-    //todo for devices
+    function getRemovedDevicesIds() {
+        const components = document.querySelectorAll(`#expanded-info-${user.id} .devices-input .devices-list .device-element`)
+        const idList = []
+        for (let i = 0; i < components.length; i++) {
+            const id = components[i].id.replace("device-element-", "")
+            const sign = components[i].querySelector("span").innerHTML
+            if (sign === "O") {
+                idList.push(Number(id))
+            }
+        }
+        return idList
+    }
+
     async function executeSave() {
         console.log("save user info")
         const name = document.getElementById(`name-input-${user.id}`).value
@@ -23,13 +35,33 @@ const ExpandedInfo = ({ user, users, setUsers, tokens, setTokens, devices, setDe
             "name": name,
             "role": role
         }
-        const newUser = await putRequest(LINK_PUT_USER, user.id, payload, tokens[0])
-        console.log("new user: ", newUser)
-        const newUserList = users.filter((el) => el.id !== user.id)
-        const index = users.indexOf(user)
-        newUserList.splice(index, 0, newUser)
-        setUsers([...newUserList])
-        setRequestStatus("success")
+        try {
+            let madeOneRequest = false
+            if (name !== user.name || role !== user.role) {
+                madeOneRequest = true
+                await putRequest(LINK_PUT_USER + user.id, tokens[0], payload)
+            }
+            const removedDevicesIds = getRemovedDevicesIds()
+            if (removedDevicesIds.length > 0) {
+                madeOneRequest = true
+                await putRequest(LINK_UPDATE_DEVICES_USER + "0", tokens[0], removedDevicesIds)
+            }
+            let newUser = user
+            if (madeOneRequest) {
+                newUser = await getRequest(LINK_GET_USER + user.id, tokens[0], {})
+                const newUserList = users.filter((el) => el.id !== user.id)
+                const index = users.indexOf(user)
+                newUserList.splice(index, 0, newUser)
+                setUsers([...newUserList])
+                const data = await getRequest(LINK_GET_DEVICES_WITHOUT_OWNER, tokens[0], {})
+                setDevices(data)
+                setRequestStatus("success")
+            }
+        } catch (exception) {
+            setRequestStatus("danger")
+            alert(exception)
+        }
+
     }
 
     function common(e, color, myFunc, html) {
@@ -53,9 +85,12 @@ const ExpandedInfo = ({ user, users, setUsers, tokens, setTokens, devices, setDe
         common(e, "rgb(101, 214, 255)", removeDevice, "X")
     }
 
-    function makeCorrelation(e) {
+    async function makeCorrelation(e) {
         const input = document.getElementById(`input-for-datalist-${user.id}`)
         const inputValue = input.value
+        if (inputValue === "") {
+            return
+        }
         input.value = ""
         console.log(inputValue)
         const theDevice = devices.filter((el) => el.address === inputValue)
@@ -64,7 +99,23 @@ const ExpandedInfo = ({ user, users, setUsers, tokens, setTokens, devices, setDe
             alert("The value does not correspound to a valid address")
             return
         }
-        //add the device to the user
+        const newLink = LINK_ADD_DEVICE_TO_USER.replace("DEVICEID", theDevice[0].id).replace("USERID", user.id)
+        console.log("put link: ", newLink)
+        try {
+            const response = await putRequest(newLink, tokens[0], {})
+            const newUser = await getRequest(LINK_GET_USER + user.id, tokens[0], {})
+            const newList = users.filter((el) => el.id !== user.id)
+            const index = users.indexOf(user)
+            newList.splice(index, 0, newUser)
+            setUsers([...newList])
+            const newDevicesList = devices.filter((el) => el.id !== theDevice[0].id)
+            setDevices([...newDevicesList])
+            setRequestStatus("success")
+        } catch (exception) {
+            setRequestStatus("danger")
+            alert(exception)
+        }
+
     }
 
     async function credentialsModalAction(e) {
@@ -74,7 +125,7 @@ const ExpandedInfo = ({ user, users, setUsers, tokens, setTokens, devices, setDe
         document.getElementById(`change-password-${user.id}`).value = ""
 
         try {
-            const credentialsId = await getRequest(LINK_GET_CREDENTIALS_ID + user.id, tokens[0])
+            const credentialsId = await getRequest(LINK_GET_CREDENTIALS_ID + user.id, tokens[0], {})
             console.log("credentials id: ", credentialsId)
             const credentials = {
                 id: credentialsId,
@@ -82,7 +133,7 @@ const ExpandedInfo = ({ user, users, setUsers, tokens, setTokens, devices, setDe
                 password: newPassword
             }
             console.log("payload for credentials update: ", credentials)
-            const newCredentials = await putRequest(LINK_PUT_CREDENTIALS, credentialsId, credentials, tokens[0])
+            const response = await putRequest(LINK_PUT_CREDENTIALS + credentialsId, tokens[0], credentials)
             setRequestStatus("success")
         } catch (exception) {
             console.log(exception)
@@ -149,6 +200,7 @@ const ExpandedInfo = ({ user, users, setUsers, tokens, setTokens, devices, setDe
                             {
                                 user.devices.map((el, index) => (
                                     <div className='device-element'
+                                        id={`device-element-${el.id}`}
                                         key={index}
                                         style={{ backgroundColor: "rgb(101, 214, 255)", display: "inline-block", padding: "0.2rem 1rem", borderRadius: "20px", marginRight: "10px", marginBottom: "0.5rem", transition: "all 0.4s" }}>
                                         {el.address}

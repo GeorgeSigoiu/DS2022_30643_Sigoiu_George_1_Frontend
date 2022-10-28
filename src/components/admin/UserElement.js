@@ -11,10 +11,9 @@ const UserElement = ({ user, tokens, setTokens, users, setUsers, devices, setDev
 
     async function executeDelete() {
         console.log("delete user")
-        const access_token = tokens[0]
         const userId = user.id
         try {
-            const responseStatus = await deleteRequest(LINK_DELETE_USER, userId, access_token)
+            const responseStatus = await deleteRequest(LINK_DELETE_USER + userId, tokens[0], {})
             console.log(responseStatus)
             if (responseStatus >= 200 && responseStatus < 300) {
                 setRequestStatus("success")

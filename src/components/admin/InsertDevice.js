@@ -22,7 +22,7 @@ const InsertDevice = ({ tokens, setTokens, devices, setDevices }) => {
         }
         try {
             console.log(payload)
-            const newDevice = await postRequest(LINK_ADD_DEVICE, payload, tokens[0])
+            const newDevice = await postRequest(LINK_ADD_DEVICE, tokens[0], payload)
             setDevices([...devices, newDevice])
             setRequestStatus("success")
         } catch (exception) {

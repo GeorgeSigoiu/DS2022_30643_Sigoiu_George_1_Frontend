@@ -2,10 +2,11 @@ import React, { useState, useEffect } from 'react'
 import SearchBar from '../common/SearchBar'
 import InsertUser from './InsertUser'
 import UserElement from './UserElement'
-import { getRequest, LINK_GET_DEVICES_WITHOUT_OWNER, LINK_GET_USERS } from '../requests'
+import { getRequest, isTokenExpiredError, LINK_GET_DEVICES_WITHOUT_OWNER, LINK_GET_USERS, tryRefreshTokens } from '../requests'
+import { useNavigate } from 'react-router-dom'
 
 const UsersList = ({ tokens, setTokens }) => {
-
+    const navigate = useNavigate()
     const [users, setUsers] = useState([])
     const [devices, setDevices] = useState([])
     const [once, doOnce] = useState(false)
@@ -22,12 +23,12 @@ const UsersList = ({ tokens, setTokens }) => {
 
 
     async function getUsers() {
-        const data = await getRequest(LINK_GET_USERS, tokens[0])
+        const data = await getRequest(LINK_GET_USERS, tokens[0], {})
         setUsers(data)
     }
 
     async function getDevices() {
-        const data = await getRequest(LINK_GET_DEVICES_WITHOUT_OWNER, tokens[0])
+        const data = await getRequest(LINK_GET_DEVICES_WITHOUT_OWNER, tokens[0], {})
         setDevices(data)
     }
 
@@ -39,7 +40,7 @@ const UsersList = ({ tokens, setTokens }) => {
         <div id="users_list" style={{ marginBottom: "2rem" }}>
             <div className='container'>
                 <div style={{ display: "flex", justifyContent: "space-between" }}>
-                    <SearchBar filters={filters} />
+                    <SearchBar filters={filters} tokens={tokens} />
                     <InsertUser tokens={tokens} setTokens={setTokens} users={users} setUsers={setUsers} />
                 </div>
                 <div id="accordion-users">
