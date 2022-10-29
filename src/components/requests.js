@@ -101,7 +101,7 @@ export async function login(username, password) {
     return response
 }
 
-export async function insertUser(user, access_token) {
+export async function insertUser(link, access_token, user) {
     const credentials = {
         username: user.username,
         password: user.password

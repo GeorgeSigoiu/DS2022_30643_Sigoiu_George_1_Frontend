@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import Alert from '../common/Alert'
 import Modal from '../common/Modal'
+import { requestHandler } from '../handlers'
 import { insertUser } from '../requests'
 
 const InsertUser = ({ tokens, setTokens, users, setUsers }) => {
@@ -24,16 +25,17 @@ const InsertUser = ({ tokens, setTokens, users, setUsers }) => {
             role: role
         }
         try {
-            const newUser = await insertUser(userToInsert, tokens[0])
+            const newUser = await requestHandler(insertUser, {
+                link: "",
+                payload: userToInsert
+            }, tokens, setTokens)
             setUsers([...users, newUser])
             console.log(username, password, name, role)
             setRequestStatus("success")
         } catch (exception) {
-            alert(exception)
+            console.log(exception)
             setRequestStatus("danger")
         }
-
-
     }
 
     return (

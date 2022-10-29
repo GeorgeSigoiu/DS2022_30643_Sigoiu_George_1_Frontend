@@ -4,9 +4,9 @@ import InsertUser from './InsertUser'
 import UserElement from './UserElement'
 import { getRequest, isTokenExpiredError, LINK_GET_DEVICES_WITHOUT_OWNER, LINK_GET_USERS, tryRefreshTokens } from '../requests'
 import { useNavigate } from 'react-router-dom'
+import { requestHandler } from '../handlers'
 
 const UsersList = ({ tokens, setTokens }) => {
-    const navigate = useNavigate()
     const [users, setUsers] = useState([])
     const [devices, setDevices] = useState([])
     const [once, doOnce] = useState(false)
@@ -16,6 +16,10 @@ const UsersList = ({ tokens, setTokens }) => {
     }, [users])
 
     useEffect(() => {
+
+    }, [devices])
+
+    useEffect(() => {
         getUsers()
         getDevices()
         console.log("getUsers()")
@@ -23,12 +27,18 @@ const UsersList = ({ tokens, setTokens }) => {
 
 
     async function getUsers() {
-        const data = await getRequest(LINK_GET_USERS, tokens[0], {})
+        const data = await requestHandler(getRequest, {
+            link: LINK_GET_USERS,
+            payload: {}
+        }, tokens, setTokens)
         setUsers(data)
     }
 
     async function getDevices() {
-        const data = await getRequest(LINK_GET_DEVICES_WITHOUT_OWNER, tokens[0], {})
+        const data = await requestHandler(getRequest, {
+            link: LINK_GET_DEVICES_WITHOUT_OWNER,
+            payload: {}
+        }, tokens, setTokens)
         setDevices(data)
     }
 

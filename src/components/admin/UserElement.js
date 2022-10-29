@@ -4,6 +4,7 @@ import ExpandedInfo from './ExpandedInfo'
 import './user_element.css'
 import Alert from '../common/Alert'
 import { deleteRequest, LINK_DELETE_USER } from '../requests'
+import { requestHandler } from '../handlers'
 
 const UserElement = ({ user, tokens, setTokens, users, setUsers, devices, setDevices }) => {
 
@@ -13,7 +14,11 @@ const UserElement = ({ user, tokens, setTokens, users, setUsers, devices, setDev
         console.log("delete user")
         const userId = user.id
         try {
-            const responseStatus = await deleteRequest(LINK_DELETE_USER + userId, tokens[0], {})
+            console.log("send delete request")
+            const responseStatus = await requestHandler(deleteRequest, {
+                link: LINK_DELETE_USER + userId,
+                payload: {}
+            }, tokens, setTokens)
             console.log(responseStatus)
             if (responseStatus >= 200 && responseStatus < 300) {
                 setRequestStatus("success")
@@ -23,7 +28,7 @@ const UserElement = ({ user, tokens, setTokens, users, setUsers, devices, setDev
                 setRequestStatus("danger")
             }
         } catch (exception) {
-            alert(exception)
+            console.log(exception)
             setRequestStatus("danger")
         }
 

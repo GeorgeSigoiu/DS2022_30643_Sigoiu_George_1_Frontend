@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import SearchBar from '../common/SearchBar'
+import { requestHandler } from '../handlers'
 import { LINK_GET_DEVICES, getRequest } from '../requests'
 import DeviceElement from './DeviceElement'
 import InsertDevice from './InsertDevice'
@@ -20,8 +21,12 @@ const DevicesList = ({ tokens, setTokens }) => {
 
 
     async function getDevices() {
-        const data = await getRequest(LINK_GET_DEVICES, tokens[0], {})
-        setDevices(data)
+        const args = {
+            link: LINK_GET_DEVICES,
+            payload: {}
+        }
+        const data = await requestHandler(getRequest, args, tokens, setTokens)
+        setDevices([...data])
         console.log(data)
     }
 

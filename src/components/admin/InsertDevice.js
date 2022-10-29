@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import Alert from '../common/Alert'
 import Modal from '../common/Modal'
+import { requestHandler } from '../handlers'
 import { LINK_ADD_DEVICE, postRequest } from '../requests'
 
 const InsertDevice = ({ tokens, setTokens, devices, setDevices }) => {
@@ -22,11 +23,14 @@ const InsertDevice = ({ tokens, setTokens, devices, setDevices }) => {
         }
         try {
             console.log(payload)
-            const newDevice = await postRequest(LINK_ADD_DEVICE, tokens[0], payload)
+            const newDevice = await requestHandler(postRequest, {
+                link: LINK_ADD_DEVICE,
+                payload: payload
+            }, tokens, setTokens)
             setDevices([...devices, newDevice])
             setRequestStatus("success")
         } catch (exception) {
-            alert(exception)
+            console.log(exception)
             setRequestStatus("danger")
         }
     }

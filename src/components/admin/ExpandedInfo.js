@@ -1,24 +1,30 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import Alert from '../common/Alert'
 import "./expanded_info.css"
 import Modal from '../common/Modal'
 import { getRequest, LINK_PUT_USER, putRequest, LINK_GET_CREDENTIALS_ID, LINK_PUT_CREDENTIALS, LINK_ADD_DEVICE_TO_USER, LINK_GET_USER, LINK_UPDATE_DEVICES_USER, LINK_GET_DEVICES_WITHOUT_OWNER } from '../requests'
+import { requestHandler } from '../handlers'
 
 const ExpandedInfo = ({ user, users, setUsers, tokens, setTokens, devices, setDevices }) => {
 
     const [requestStatus, setRequestStatus] = useState("")
 
     function getRemovedDevicesIds() {
-        const components = document.querySelectorAll(`#expanded-info-${user.id} .devices-input .devices-list .device-element`)
-        const idList = []
-        for (let i = 0; i < components.length; i++) {
-            const id = components[i].id.replace("device-element-", "")
-            const sign = components[i].querySelector("span").innerHTML
-            if (sign === "O") {
-                idList.push(Number(id))
+        try {
+            const components = document.querySelectorAll(`#expanded-info-${user.id} .devices-input .devices-list .device-element`)
+            const idList = []
+            for (let i = 0; i < components.length; i++) {
+                const id = components[i].id.replace("device-element-", "")
+                const sign = components[i].querySelector("span").innerHTML
+                if (sign === "O") {
+                    idList.push(Number(id))
+                }
             }
+            return idList
+        } catch (exception) {
+            console.log("Exception getting the addresses: ", exception)
         }
-        return idList
+        return []
     }
 
     async function executeSave() {
@@ -39,27 +45,42 @@ const ExpandedInfo = ({ user, users, setUsers, tokens, setTokens, devices, setDe
             let madeOneRequest = false
             if (name !== user.name || role !== user.role) {
                 madeOneRequest = true
-                await putRequest(LINK_PUT_USER + user.id, tokens[0], payload)
+                console.log("update name and role")
+                await requestHandler(putRequest, {
+                    link: LINK_PUT_USER + user.id,
+                    payload: payload
+                }, tokens, setTokens)
             }
             const removedDevicesIds = getRemovedDevicesIds()
             if (removedDevicesIds.length > 0) {
                 madeOneRequest = true
-                await putRequest(LINK_UPDATE_DEVICES_USER + "0", tokens[0], removedDevicesIds)
+                console.log("update linked devices")
+                await requestHandler(putRequest, {
+                    link: LINK_UPDATE_DEVICES_USER + "0",
+                    payload: removedDevicesIds
+                }, tokens, setTokens)
             }
             let newUser = user
             if (madeOneRequest) {
-                newUser = await getRequest(LINK_GET_USER + user.id, tokens[0], {})
+                console.log("get the user after save")
+                newUser = await requestHandler(getRequest, {
+                    link: LINK_GET_USER + user.id,
+                    payload: {}
+                }, tokens, setTokens)
                 const newUserList = users.filter((el) => el.id !== user.id)
                 const index = users.indexOf(user)
                 newUserList.splice(index, 0, newUser)
                 setUsers([...newUserList])
-                const data = await getRequest(LINK_GET_DEVICES_WITHOUT_OWNER, tokens[0], {})
-                setDevices(data)
+                const data = await requestHandler(getRequest, {
+                    link: LINK_GET_DEVICES_WITHOUT_OWNER,
+                    payload: {}
+                }, tokens, setTokens)
+                setDevices([...data])
                 setRequestStatus("success")
             }
         } catch (exception) {
             setRequestStatus("danger")
-            alert(exception)
+            console.log(exception)
         }
 
     }
@@ -100,20 +121,23 @@ const ExpandedInfo = ({ user, users, setUsers, tokens, setTokens, devices, setDe
             return
         }
         const newLink = LINK_ADD_DEVICE_TO_USER.replace("DEVICEID", theDevice[0].id).replace("USERID", user.id)
-        console.log("put link: ", newLink)
         try {
-            const response = await putRequest(newLink, tokens[0], {})
-            const newUser = await getRequest(LINK_GET_USER + user.id, tokens[0], {})
+            const response = await requestHandler(putRequest, {
+                link: newLink,
+                payload: {}
+            }, tokens, setTokens)
+            const newUser = response.data
+            console.log("new user: ", newUser)
             const newList = users.filter((el) => el.id !== user.id)
             const index = users.indexOf(user)
             newList.splice(index, 0, newUser)
-            setUsers([...newList])
             const newDevicesList = devices.filter((el) => el.id !== theDevice[0].id)
             setDevices([...newDevicesList])
+            setUsers([...newList])
             setRequestStatus("success")
         } catch (exception) {
             setRequestStatus("danger")
-            alert(exception)
+            console.log(exception)
         }
 
     }
@@ -125,7 +149,10 @@ const ExpandedInfo = ({ user, users, setUsers, tokens, setTokens, devices, setDe
         document.getElementById(`change-password-${user.id}`).value = ""
 
         try {
-            const credentialsId = await getRequest(LINK_GET_CREDENTIALS_ID + user.id, tokens[0], {})
+            const credentialsId = await requestHandler(getRequest, {
+                link: LINK_GET_CREDENTIALS_ID + user.id,
+                payload: {}
+            }, tokens, setTokens)
             console.log("credentials id: ", credentialsId)
             const credentials = {
                 id: credentialsId,
@@ -133,7 +160,10 @@ const ExpandedInfo = ({ user, users, setUsers, tokens, setTokens, devices, setDe
                 password: newPassword
             }
             console.log("payload for credentials update: ", credentials)
-            const response = await putRequest(LINK_PUT_CREDENTIALS + credentialsId, tokens[0], credentials)
+            await requestHandler(putRequest, {
+                link: LINK_PUT_CREDENTIALS + credentialsId,
+                payload: credentials
+            }, tokens, setTokens)
             setRequestStatus("success")
         } catch (exception) {
             console.log(exception)

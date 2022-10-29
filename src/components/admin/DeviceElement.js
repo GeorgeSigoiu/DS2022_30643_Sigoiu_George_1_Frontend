@@ -3,6 +3,7 @@ import Modal from '../common/Modal'
 import './device_element.css'
 import Alert from '../common/Alert'
 import { deleteRequest, LINK_DELETE_DEVICE, LINK_DELETE_USER, LINK_PUT_DEVICE, putRequest } from '../requests'
+import { requestHandler } from '../handlers'
 
 const DeviceElement = ({ device, tokens, setTokens, devices, setDevices }) => {
 
@@ -12,7 +13,11 @@ const DeviceElement = ({ device, tokens, setTokens, devices, setDevices }) => {
         console.log("delete device")
         const deviceId = device.id
         try {
-            const responseStatus = await deleteRequest(LINK_DELETE_DEVICE + deviceId, tokens[0], null)
+            const args = {
+                link: LINK_DELETE_DEVICE + deviceId,
+                payload: {}
+            }
+            const responseStatus = await requestHandler(deleteRequest, args, tokens, setTokens)
             console.log(responseStatus)
             if (responseStatus >= 200 && responseStatus < 300) {
                 setRequestStatus("success")
@@ -22,7 +27,7 @@ const DeviceElement = ({ device, tokens, setTokens, devices, setDevices }) => {
                 setRequestStatus("danger")
             }
         } catch (exception) {
-            alert(exception)
+            console.log(exception)
             setRequestStatus("danger")
         }
     }
@@ -38,7 +43,13 @@ const DeviceElement = ({ device, tokens, setTokens, devices, setDevices }) => {
             maxHourlyEnergyConsumption: consumption
         }
         try {
-            const newDevice = await putRequest(LINK_PUT_DEVICE + device.id, tokens[0], payload)
+            const args = {
+                link: LINK_PUT_DEVICE + device.id,
+                payload: payload
+            }
+            const response = await requestHandler(putRequest, args, tokens, setTokens)
+            const newDevice = response.data
+            console.log("new device: ", newDevice)
             const index = devices.indexOf(device)
             const newDevicesList = devices.filter((el) => el.id !== device.id)
             newDevicesList.splice(index, 0, newDevice)
@@ -46,7 +57,7 @@ const DeviceElement = ({ device, tokens, setTokens, devices, setDevices }) => {
             setRequestStatus("success")
         } catch (exception) {
             setRequestStatus("danger")
-            alert(exception)
+            console.log(exception)
         }
     }
 

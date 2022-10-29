@@ -1,3 +1,4 @@
+import { isTokenExpiredError, tryRefreshTokens } from "./requests"
 
 export const TOKENS_EXPIRED = "tokens expired"
 
@@ -13,12 +14,23 @@ export async function requestHandler(requestToCall, args, tokens, setTokens) {
                 const refresh_token = response.refresh_token
                 const newTokens = [access_token, refresh_token]
                 setTokens(newTokens)
-
+                try {
+                    const data = await requestToCall(args.link, newTokens[0], args.payload)
+                    return data
+                } catch (exp) {
+                    if (isTokenExpiredError(exp)) {
+                        window.location.href = "/login?session_expired"
+                        //navigate("/login?sesion_expired")
+                    } else {
+                        alert(exp)
+                    }
+                }
             } else {
-                navigate("/login?sesion_expired")
+                window.location.href = "/login?session_expired"
+                // navigate("/login?sesion_expired")
             }
         } else {
-            alert(exception)
+            console.log(exception)
         }
     }
 }
