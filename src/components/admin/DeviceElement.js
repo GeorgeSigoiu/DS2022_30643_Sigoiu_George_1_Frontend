@@ -5,7 +5,7 @@ import Alert from '../common/Alert'
 import { deleteRequest, LINK_DELETE_DEVICE, LINK_DELETE_USER, LINK_PUT_DEVICE, putRequest } from '../requests'
 import { requestHandler } from '../handlers'
 
-const DeviceElement = ({ device, tokens, setTokens, devices, setDevices }) => {
+const DeviceElement = ({ device, tokens, setTokens, devices, setDevices, role }) => {
 
     const [requestStatus, setRequestStatus] = useState("")
 
@@ -85,46 +85,50 @@ const DeviceElement = ({ device, tokens, setTokens, devices, setDevices }) => {
                             </span>
                         </div>
                     </div>
-                    <div className='operation-field'>
-                        <div className='icon btn btn-primary' data-bs-toggle="modal" data-bs-target={`#myModal-edit-${device.id}`}>
-                            <i className="fa-solid fa-pen-to-square"></i>
-                        </div>
-                        <div className='icon btn btn-danger' data-bs-toggle="modal" data-bs-target={`#myModal-delete-${device.id}`}>
-                            <i className="fa-solid fa-trash"></i>
-                        </div>
-                    </div>
+                    {
+                        role === "admin" &&
+                        (<div className='operation-field'>
+                            <div className='icon btn btn-primary' data-bs-toggle="modal" data-bs-target={`#myModal-edit-${device.id}`}>
+                                <i className="fa-solid fa-pen-to-square"></i>
+                            </div>
+                            <div className='icon btn btn-danger' data-bs-toggle="modal" data-bs-target={`#myModal-delete-${device.id}`}>
+                                <i className="fa-solid fa-trash"></i>
+                            </div>
+                        </div>)
+                    }
                 </div>
             </div>
+            {
+                role === "admin" && (
+                    <><Modal type="alert"
+                        title={"Are you sure you want to delete?"}
+                        content={`Device from address: ${device.address}?`}
+                        modalId={`myModal-delete-${device.id}`}
+                        btnMessage={"Yes, delete"}
+                        execute={executeDelete} /><Modal type="alert"
+                            title={"Are you sure you want to delete?"}
+                            content={<div>
+                                <div className='space-for-all-subdivs'>
+                                    <div>
+                                        Address: <input type="text" id="edit-device-address" style={{ width: "300px" }} defaultValue={device.address} />
+                                    </div>
+                                    <div style={{ display: "flex", flexDirection: "column" }}>
+                                        <p>
+                                            Description
+                                        </p>
+                                        <textarea id="edit-device-description" defaultValue={device.description} />
+                                    </div>
+                                    <div>
+                                        Max hourly consumption: <input type="number" id="edit-device-consumption" style={{ width: "100px" }} defaultValue={device.maxHourlyEnergyConsumption} />
+                                    </div>
+                                </div>
+                            </div>}
+                            modalId={`myModal-edit-${device.id}`}
+                            btnMessage={"Save"}
+                            execute={executeSave} /></>
+                )
+            }
 
-            <Modal type="alert"
-                title={"Are you sure you want to delete?"}
-                content={`Device from address: ${device.address}?`}
-                modalId={`myModal-delete-${device.id}`}
-                btnMessage={"Yes, delete"}
-                execute={executeDelete} />
-            <Modal type="alert"
-                title={"Are you sure you want to delete?"}
-                content={
-                    <div>
-                        <div className='space-for-all-subdivs'>
-                            <div>
-                                Address: <input type="text" id="edit-device-address" style={{ width: "300px" }} defaultValue={device.address} />
-                            </div>
-                            <div style={{ display: "flex", flexDirection: "column" }}>
-                                <p>
-                                    Description
-                                </p>
-                                <textarea id="edit-device-description" defaultValue={device.description} />
-                            </div>
-                            <div>
-                                Max hourly consumption: <input type="number" id="edit-device-consumption" style={{ width: "100px" }} defaultValue={device.maxHourlyEnergyConsumption} />
-                            </div>
-                        </div>
-                    </div>
-                }
-                modalId={`myModal-edit-${device.id}`}
-                btnMessage={"Save"}
-                execute={executeSave} />
             {
                 requestStatus !== "" &&
                 (

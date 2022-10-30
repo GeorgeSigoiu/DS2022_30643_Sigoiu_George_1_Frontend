@@ -10,15 +10,19 @@ import DevicesList from './components/admin/DevicesList';
 function App() {
   const [userType, setUserType] = useState("")
   const [tokens, setTokens] = useState("")
+  const [loggedUser, setLoggedUser] = useState("")
 
   useEffect(() => {
     console.log(userType)
   }, [userType])
 
   useEffect(() => {
+    console.log("set Logged user: ", loggedUser)
+  }, [loggedUser])
+
+  useEffect(() => {
     if (tokens !== "") {
       const access_token = tokens[0]
-      const refresh_token = tokens[1]
       const decoded = jwt_decode(access_token)
       const roles = decoded.roles
       const role = roles[0]
@@ -39,11 +43,15 @@ function App() {
         <Routes>
           <Route path="/admin" element={<AdminDashboard tokens={tokens} setTokens={setTokens} />} />
           <Route path="/admin/users" element={<UsersList tokens={tokens} setTokens={setTokens} />} />
-          <Route path="/admin/devices" element={<DevicesList tokens={tokens} setTokens={setTokens} />} />
-          <Route path="/admin/settings" element={<div>SETTINGS</div>} />
+          <Route path="/admin/devices" element={<DevicesList tokens={tokens} setTokens={setTokens} role="admin" />} />
 
-          <Route path="/login" element={<Login setTokens={setTokens} setUserType={setUserType} />} />
-          <Route path="/" element={<Login setTokens={setTokens} setUserType={setUserType} />} />
+          <Route path="/user/settings" element={<div>SETTINGS</div>} />
+
+          <Route path="/client" element={<div>USER PAGE</div>} />
+          <Route path="/client/devices" element={<DevicesList tokens={tokens} setTokens={setTokens} role="client" loggedUser={loggedUser} />} />
+
+          <Route path="/login" element={<Login setTokens={setTokens} setUserType={setUserType} setLoggedUser={setLoggedUser} />} />
+          <Route path="/" element={<Login setTokens={setTokens} setUserType={setUserType} setLoggedUser={setLoggedUser} />} />
         </Routes>
       </Router>
     </div>

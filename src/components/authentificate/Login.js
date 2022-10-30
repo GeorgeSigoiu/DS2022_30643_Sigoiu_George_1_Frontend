@@ -1,14 +1,16 @@
 import React, { useEffect, useState } from 'react'
 import './login.css'
 import { useNavigate } from 'react-router-dom';
-import { login } from '../requests';
+import { getRequest, LINK_GET_USER_BY_USERNAME, login } from '../requests';
 import jwt_decode from "jwt-decode";
+import { requestHandler } from '../handlers';
 
-const Login = ({ setTokens, setUserType }) => {
+const Login = ({ setTokens, setUserType, setLoggedUser }) => {
 
     const navigate = useNavigate();
     setUserType("")
     setTokens("")
+    setLoggedUser("")
 
     const [showAlert, setShowAlert] = useState(false)
 
@@ -26,6 +28,13 @@ const Login = ({ setTokens, setUserType }) => {
         const response = await login(username, password)
         const access_token = response.access_token
         const refresh_token = response.refresh_token
+
+        const userUsername = response.username
+        const user = await requestHandler(getRequest, {
+            link: LINK_GET_USER_BY_USERNAME + userUsername,
+            payload: {}
+        }, [access_token, refresh_token], setTokens)
+        setLoggedUser(user)
 
         setTokens([access_token, refresh_token])
         const decoded = jwt_decode(access_token)

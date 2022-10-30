@@ -1,7 +1,7 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 import UserSticker from '../common/UserSticker'
-import './admin_navigation.css'
+import '../common/navigation.css'
 
 
 const AdminNavigation = ({ setUserType }) => {
@@ -13,15 +13,15 @@ const AdminNavigation = ({ setUserType }) => {
 
     return (
         <nav>
-            <div id="admin-nav">
+            <div id="common-nav">
                 <div className='container'>
                     <div className='sticker'>
                         <UserSticker userType="admin" />
                     </div>
-                    <div className='admin-operations'>
+                    <div className='operations'>
                         <ul>
                             <li id="users-op">
-                                <Link to="/admin/settings">
+                                <Link to="/user/settings">
                                     <div type="button" className="btn btn-outline-primary">settings</div>
                                 </Link>
                             </li>
@@ -45,7 +45,6 @@ const AdminNavigation = ({ setUserType }) => {
                 </div>
             </div>
         </nav>
-
     )
 }
 
