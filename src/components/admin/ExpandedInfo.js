@@ -29,7 +29,8 @@ const ExpandedInfo = ({ user, users, setUsers, tokens, setTokens, devices, setDe
 
     async function executeSave() {
         console.log("save user info")
-        const name = document.getElementById(`name-input-${user.id}`).value
+        const name = document.getElementById(`name-input-${user.id}`).value.trim()
+        document.getElementById(`name-input-${user.id}`).value = document.getElementById(`name-input-${user.id}`).value.trim()
         const checkInput = document.getElementById(`check-role-input-${user.id}`)
         let role
         if (checkInput.checked === true) {
@@ -45,7 +46,6 @@ const ExpandedInfo = ({ user, users, setUsers, tokens, setTokens, devices, setDe
             let madeOneRequest = false
             if (name !== user.name || role !== user.role) {
                 madeOneRequest = true
-                console.log("update name and role")
                 await requestHandler(putRequest, {
                     link: LINK_PUT_USER + user.id,
                     payload: payload
@@ -54,7 +54,6 @@ const ExpandedInfo = ({ user, users, setUsers, tokens, setTokens, devices, setDe
             const removedDevicesIds = getRemovedDevicesIds()
             if (removedDevicesIds.length > 0) {
                 madeOneRequest = true
-                console.log("update linked devices")
                 await requestHandler(putRequest, {
                     link: LINK_UPDATE_DEVICES_USER + "0",
                     payload: removedDevicesIds
@@ -62,7 +61,6 @@ const ExpandedInfo = ({ user, users, setUsers, tokens, setTokens, devices, setDe
             }
             let newUser = user
             if (madeOneRequest) {
-                console.log("get the user after save")
                 newUser = await requestHandler(getRequest, {
                     link: LINK_GET_USER_BY_ID + user.id,
                     payload: {}
@@ -113,7 +111,6 @@ const ExpandedInfo = ({ user, users, setUsers, tokens, setTokens, devices, setDe
             return
         }
         input.value = ""
-        console.log(inputValue)
         const theDevice = devices.filter((el) => el.address === inputValue)
         console.log(theDevice[0])
         if (theDevice[0] === null || theDevice[0] === undefined) {
@@ -171,6 +168,22 @@ const ExpandedInfo = ({ user, users, setUsers, tokens, setTokens, devices, setDe
         }
     }
 
+    function onChangeInput(e) {
+        const text = e.currentTarget.value
+        const textWithoutSpaces = text.replaceAll(" ", "")
+        const icon = e.currentTarget.parentNode.children[2]
+        const btnSave = document.getElementById(`btn-save-${user.id}`)
+        if (text === "" || textWithoutSpaces === "") {
+            icon.style.opacity = "100%"
+            icon.style.pointerEvents = "all"
+            btnSave.classList.add("disabled")
+        } else {
+            icon.style.opacity = "0%"
+            icon.style.pointerEvents = "none"
+            btnSave.classList.remove("disabled")
+        }
+    }
+
     return (
         <div className='expanded-info hide-info collapse' id={`expanded-info-${user.id}`} data-bs-parent="#accordion-users" >
             <div className='expanded-info-content'>
@@ -184,7 +197,8 @@ const ExpandedInfo = ({ user, users, setUsers, tokens, setTokens, devices, setDe
                     </div>
                     <div className='info-input name-input'>
                         <label htmlFor="name" >Name</label>
-                        <input id={`name-input-${user.id}`} type="text" name="name" defaultValue={user.name} style={{ marginLeft: "1rem", paddingLeft: "10px" }} />
+                        <input id={`name-input-${user.id}`} type="text" name="name" defaultValue={user.name} style={{ marginLeft: "1rem", paddingLeft: "10px" }} onChange={(e) => onChangeInput(e)} />
+                        <i className="fa-solid fa-circle-exclamation fa-xl" data-bs-toggle="tooltip" title="Name can not be empty!" id="icon-new-password" style={{ color: "rgb(190, 205, 50)", marginLeft: "10px", opacity: "0%", pointerEvents: "none" }}></i>
                     </div>
                     <div className='info-input role-input'>
                         <label >Role</label>
@@ -243,7 +257,7 @@ const ExpandedInfo = ({ user, users, setUsers, tokens, setTokens, devices, setDe
                     </div>
                 </div>
                 <div style={{ marginTop: "auto", marginBottom: "auto", marginRight: "1rem" }}>
-                    <div type="button" className="btn btn-primary" onClick={executeSave}>Save</div>
+                    <div type="button" className="btn btn-primary" id={`btn-save-${user.id}`} onClick={executeSave}>Save</div>
                 </div>
             </div>
             {
