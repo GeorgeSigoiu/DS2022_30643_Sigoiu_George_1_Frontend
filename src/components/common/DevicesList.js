@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from 'react'
-import SearchBar from '../common/SearchBar'
+import SearchBar from './SearchBar'
 import { requestHandler } from '../handlers'
 import { LINK_GET_DEVICES, getRequest, LINK_GET_DEVICES_FROM_USER } from '../requests'
 import DeviceElement from './DeviceElement'
-import InsertDevice from './InsertDevice'
+import InsertDevice from '../admin/InsertDevice'
 
 const DevicesList = ({ tokens, setTokens, role, loggedUser }) => {
 

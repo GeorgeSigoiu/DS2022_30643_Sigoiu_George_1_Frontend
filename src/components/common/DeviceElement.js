@@ -4,6 +4,7 @@ import './device_element.css'
 import Alert from '../common/Alert'
 import { deleteRequest, LINK_DELETE_DEVICE, LINK_DELETE_USER, LINK_PUT_DEVICE, putRequest } from '../requests'
 import { requestHandler } from '../handlers'
+import ChartElement from './charts/ChartElement'
 
 const DeviceElement = ({ device, tokens, setTokens, devices, setDevices, role }) => {
 
@@ -80,7 +81,7 @@ const DeviceElement = ({ device, tokens, setTokens, devices, setDevices, role })
                         </div>
                         <div>
                             <b>Consumption history</b>
-                            <span style={{ marginLeft: "10px", padding: "0rem 0.2rem" }} className="btn btn-primary" >
+                            <span style={{ marginLeft: "10px", padding: "0rem 0.2rem" }} className="btn btn-primary" data-bs-toggle="modal" data-bs-target={`#chart-show-${device.id}`} >
                                 <i className="fa-solid fa-arrow-up-right-from-square"></i>
                             </span>
                         </div>
@@ -96,16 +97,26 @@ const DeviceElement = ({ device, tokens, setTokens, devices, setDevices, role })
                             </div>
                         </div>)
                     }
+                    <Modal type="alert"
+                        title={`Chart: energy consumption for ${device.id}`}
+                        content={
+                            <ChartElement />
+                        }
+                        modalId={`chart-show-${device.id}`}
+                        btnMessage={"Ok"}
+                        execute={() => console.log("chart open")} />
                 </div>
             </div>
             {
                 role === "admin" && (
-                    <><Modal type="alert"
-                        title={"Are you sure you want to delete?"}
-                        content={`Device from address: ${device.address}?`}
-                        modalId={`myModal-delete-${device.id}`}
-                        btnMessage={"Yes, delete"}
-                        execute={executeDelete} /><Modal type="alert"
+                    <>
+                        <Modal type="alert"
+                            title={"Are you sure you want to delete?"}
+                            content={`Device from address: ${device.address}?`}
+                            modalId={`myModal-delete-${device.id}`}
+                            btnMessage={"Yes, delete"}
+                            execute={executeDelete} />
+                        <Modal type="alert"
                             title={"Are you sure you want to delete?"}
                             content={<div>
                                 <div className='space-for-all-subdivs'>
@@ -125,7 +136,8 @@ const DeviceElement = ({ device, tokens, setTokens, devices, setDevices, role })
                             </div>}
                             modalId={`myModal-edit-${device.id}`}
                             btnMessage={"Save"}
-                            execute={executeSave} /></>
+                            execute={executeSave} />
+                    </>
                 )
             }
 
