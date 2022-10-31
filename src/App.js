@@ -6,6 +6,7 @@ import Navigation from './components/common/Navigation';
 import { useState, useEffect } from 'react';
 import jwt_decode from "jwt-decode";
 import DevicesList from './components/admin/DevicesList';
+import Settings from './components/common/Settings';
 
 function App() {
   const [userType, setUserType] = useState("")
@@ -45,7 +46,7 @@ function App() {
           <Route path="/admin/users" element={<UsersList tokens={tokens} setTokens={setTokens} />} />
           <Route path="/admin/devices" element={<DevicesList tokens={tokens} setTokens={setTokens} role="admin" />} />
 
-          <Route path="/user/settings" element={<div>SETTINGS</div>} />
+          <Route path="/user/settings" element={<Settings loggedUser={loggedUser} tokens={tokens} setTokens={setTokens} />} />
 
           <Route path="/client" element={<div>USER PAGE</div>} />
           <Route path="/client/devices" element={<DevicesList tokens={tokens} setTokens={setTokens} role="client" loggedUser={loggedUser} />} />

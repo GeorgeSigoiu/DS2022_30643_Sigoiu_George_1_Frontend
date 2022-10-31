@@ -1,0 +1,50 @@
+#settings .content-title {
+  margin-top: 2rem;
+  text-decoration: underline;
+  margin-left: 0.5rem;
+}
+
+#settings .content {
+  background-color: whitesmoke;
+  width: -webkit-fit-content;
+  width: -moz-fit-content;
+  width: fit-content;
+  padding: 1rem 1rem 1rem 2rem;
+  border: 1px solid #444;
+  margin-top: 1rem;
+  border-radius: 10px;
+  margin-bottom: 1rem;
+}
+
+#settings .content .input-field {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  margin-bottom: 0.5rem;
+  width: 420px;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+}
+
+#settings .content .input-field div input {
+  border-style: solid;
+  border-radius: 7px;
+  border-width: 1px;
+  padding-left: 10px;
+  padding-right: 10px;
+  width: 170px;
+}
+
+#settings .content .input-field div i {
+  margin-left: 10px;
+  color: #becd32;
+  cursor: pointer;
+  opacity: 0;
+  pointer-events: none;
+}
+
+#settings .btn-password {
+  margin: 0;
+}
+/*# sourceMappingURL=settings.css.map */

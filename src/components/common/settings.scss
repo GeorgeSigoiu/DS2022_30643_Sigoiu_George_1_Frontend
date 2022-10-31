@@ -1,0 +1,48 @@
+#settings {
+    .content-title {
+        margin-top: 2rem;
+        text-decoration: underline;
+        margin-left: 0.5rem;
+    }
+
+    .content {
+        background-color: whitesmoke;
+        width: fit-content;
+        padding: 1rem 1rem 1rem 2rem;
+        border: 1px solid #444;
+        margin-top: 1rem;
+        border-radius: 10px;
+        margin-bottom: 1rem;
+
+        .input-field {
+            display: flex;
+            margin-bottom: 0.5rem;
+            width: 420px;
+            justify-content: space-between;
+
+            div {
+                input {
+                    border-style: solid;
+                    border-radius: 7px;
+                    border-width: 1px;
+                    padding-left: 10px;
+                    padding-right: 10px;
+                    width: 170px;
+                }
+
+                i {
+                    margin-left: 10px;
+                    color: rgb(190, 205, 50);
+                    cursor: pointer;
+                    opacity: 0;
+                    pointer-events: none;
+                }
+            }
+
+        }
+    }
+
+    .btn-password {
+        margin: 0;
+    }
+}
