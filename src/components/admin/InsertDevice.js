@@ -7,6 +7,11 @@ import { LINK_ADD_DEVICE, postRequest } from '../requests'
 const InsertDevice = ({ tokens, setTokens, devices, setDevices }) => {
 
     const [requestStatus, setRequestStatus] = useState("")
+    const [errorMessage, setErrorMessage] = useState("")
+
+    async function checkUniqueAddress(address) {
+        return false
+    }
 
     async function insertDeviceAction() {
         console.log("insert device")
@@ -16,6 +21,15 @@ const InsertDevice = ({ tokens, setTokens, devices, setDevices }) => {
         document.getElementById("insert-device-description").text = ""
         const consumption = document.getElementById("insert-device-consumption").value
         document.getElementById("insert-device-consumption").value = ""
+        if (address === "" || address.trim() === "") {
+            return "don't close"
+        }
+        const isNew = await checkUniqueAddress(address)
+        if (!isNew) {
+            setErrorMessage("Device with this address already exists!")
+            setRequestStatus("danger")
+            return
+        }
         const payload = {
             address: address,
             description: description,
@@ -29,10 +43,29 @@ const InsertDevice = ({ tokens, setTokens, devices, setDevices }) => {
             }, tokens, setTokens)
             setDevices([...devices, newDevice])
             setRequestStatus("success")
+            setErrorMessage("Device added successfully")
         } catch (exception) {
             console.log(exception)
             setRequestStatus("danger")
+            setErrorMessage("Error adding the device!")
         }
+    }
+
+    function onChangeAction(e) {
+        const text = e.currentTarget.value
+        const textWithoutSpaces = text.replaceAll(" ", "")
+        const icon = e.currentTarget.parentNode.children[1]
+        if (text === "" || textWithoutSpaces === "") {
+            icon.style.opacity = "100%"
+            icon.style.pointerEvents = "all"
+        } else {
+            icon.style.opacity = "0%"
+            icon.style.pointerEvents = "none"
+        }
+    }
+
+    function onBlurAction(e) {
+        e.currentTarget.value = e.currentTarget.value.trim()
     }
 
     return (
@@ -46,7 +79,8 @@ const InsertDevice = ({ tokens, setTokens, devices, setDevices }) => {
                     <div>
                         <div className='space-for-all-subdivs'>
                             <div>
-                                Address: <input type="text" id="insert-device-address" style={{ width: "300px" }} />
+                                Address: <input type="text" id="insert-device-address" style={{ width: "300px" }} onBlur={(e) => onBlurAction(e)} onChange={(e) => onChangeAction(e)} />
+                                <i className="fa-solid fa-circle-exclamation fa-xl" data-bs-toggle="tooltip" title="Username can not be empty!" id="icon-new-password" style={{ color: "rgb(190, 205, 50)", marginLeft: "10px", opacity: "0%", pointerEvents: "none" }}></i>
                             </div>
                             <div style={{ display: "flex", flexDirection: "column" }}>
                                 <p>
@@ -65,7 +99,7 @@ const InsertDevice = ({ tokens, setTokens, devices, setDevices }) => {
                 requestStatus !== "" &&
                 (
                     < Alert type={requestStatus}
-                        message={requestStatus === "success" ? "Device added successfully" : "Error adding the device"}
+                        message={errorMessage}
                         setRequestStatus={setRequestStatus} />
                 )
             }
