@@ -109,7 +109,7 @@ const InsertDevice = ({ tokens, setTokens, devices, setDevices }) => {
                         </div>
                     </div>
                 )
-            } execute={insertDeviceAction} />
+            } execute={insertDeviceAction} keepOpen={true} />
             {
                 requestStatus !== "" &&
                 (

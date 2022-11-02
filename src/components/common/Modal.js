@@ -1,6 +1,6 @@
 import React from 'react'
 
-const Modal = ({ modalId, title, content, btnMessage, execute }) => {
+const Modal = ({ modalId, title, content, btnMessage, execute, keepOpen }) => {
 
     async function closeModal() {
         const canClose = await execute()
@@ -17,13 +17,17 @@ const Modal = ({ modalId, title, content, btnMessage, execute }) => {
             if (btn === null || btn === undefined) {
                 btn = document.getElementById("btn-add-device")
             }
-            btn.click()
+            try {
+                btn.click()
+            } catch (exception) {
+                //nothing
+            }
         }
     }
 
     return (
         <div className="modal fade" id={modalId}>
-            <div className="modal-dialog">
+            <div className="modal-dialog" style={{ maxWidth: "2000px", width: "fit-content" }}>
                 <div className="modal-content">
 
                     <div className="modal-header">
@@ -36,7 +40,19 @@ const Modal = ({ modalId, title, content, btnMessage, execute }) => {
                     </div>
 
                     <div className="modal-footer">
-                        <button type="button" className="btn btn-success" /*data-bs-dismiss="modal"*/ onClick={closeModal} id={`${modalId}-btn`}>{btnMessage}</button>
+                        {
+                            (keepOpen === undefined || keepOpen === false) &&
+                            (
+                                <button type="button" className="btn btn-success" data-bs-dismiss="modal" id={`${modalId}-btn`} onClick={execute}>{btnMessage}</button>
+                            )
+
+                        }
+                        {
+                            keepOpen === true &&
+                            (
+                                <button type="button" className="btn btn-success" onClick={closeModal} id={`${modalId}-btn`}>{btnMessage}</button>
+                            )
+                        }
                     </div>
 
                 </div>

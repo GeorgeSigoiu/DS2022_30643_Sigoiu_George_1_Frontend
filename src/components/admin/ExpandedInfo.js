@@ -75,6 +75,19 @@ const ExpandedInfo = ({ user, users, setUsers, tokens, setTokens, devices, setDe
                 }, tokens, setTokens)
                 setDevices([...data])
                 setRequestStatus("success")
+
+                const list = getRemovedDevicesIds()
+                list.forEach((el) => {
+                    const deviceEl = document.getElementById(`device-element-${el}`)
+                    deviceEl.style.backgroundColor = "rgb(101,214,255)"
+                    const span = deviceEl.querySelector("span")
+                    const newSpan = span.cloneNode()
+                    newSpan.removeAttribute("onclick")
+                    newSpan.addEventListener("click", removeDevice)
+                    newSpan.innerHTML = "X"
+                    deviceEl.removeChild(span)
+                    deviceEl.appendChild(newSpan)
+                })
             }
         } catch (exception) {
             setRequestStatus("danger")
@@ -84,13 +97,14 @@ const ExpandedInfo = ({ user, users, setUsers, tokens, setTokens, devices, setDe
     }
 
     function common(e, color, myFunc, html) {
-        let device = e.currentTarget.parentNode
+        let span = e.currentTarget
+        let device = span.parentNode
         device.style.backgroundColor = color
-        let newSpan = e.currentTarget.cloneNode()
+        let newSpan = span.cloneNode()
         newSpan.removeAttribute("onclick")
         newSpan.addEventListener("click", myFunc)
         newSpan.innerHTML = html
-        device.removeChild(e.currentTarget)
+        device.removeChild(span)
         device.appendChild(newSpan)
     }
 
@@ -161,6 +175,21 @@ const ExpandedInfo = ({ user, users, setUsers, tokens, setTokens, devices, setDe
                 link: LINK_PUT_CREDENTIALS + credentialsId,
                 payload: credentials
             }, tokens, setTokens)
+            const newUser = {
+                id: user.id,
+                devices: user.devices,
+                credentials: {
+                    id: user.credentials.id,
+                    username: newUsername,
+                    password: newPassword
+                },
+                name: user.name,
+                role: user.role
+            }
+            const newList = users.filter((el) => el.id !== user.id)
+            const index = users.indexOf(user)
+            newList.splice(index, 0, newUser)
+            setUsers([...newList])
             setRequestStatus("success")
         } catch (exception) {
             console.log(exception)

@@ -9,6 +9,7 @@ import ChartElement from './charts/ChartElement'
 const DeviceElement = ({ device, tokens, setTokens, devices, setDevices, role }) => {
 
     const [requestStatus, setRequestStatus] = useState("")
+    const [executeMessage, setExecuteMessage] = useState("")
 
     async function executeDelete() {
         console.log("delete device")
@@ -21,14 +22,17 @@ const DeviceElement = ({ device, tokens, setTokens, devices, setDevices, role })
             const responseStatus = await requestHandler(deleteRequest, args, tokens, setTokens)
             console.log(responseStatus)
             if (responseStatus >= 200 && responseStatus < 300) {
+                setExecuteMessage("Device successfuly deleted!")
                 setRequestStatus("success")
                 const newDevicesList = devices.filter((el) => el.id !== deviceId)
                 setDevices([...newDevicesList])
             } else {
+                setExecuteMessage("Error deleting the device!")
                 setRequestStatus("danger")
             }
         } catch (exception) {
             console.log(exception)
+            setExecuteMessage("Error deleting the device!")
             setRequestStatus("danger")
         }
     }
@@ -38,6 +42,11 @@ const DeviceElement = ({ device, tokens, setTokens, devices, setDevices, role })
         const address = document.getElementById("edit-device-address").value
         const description = document.getElementById("edit-device-description").value
         const consumption = document.getElementById("edit-device-consumption").value
+        if (address === "" || address.trim() === "") {
+            setExecuteMessage("Address can not be empty! Device did not change!")
+            setRequestStatus("danger")
+            return
+        }
         const payload = {
             address: address,
             description: description,
@@ -55,8 +64,10 @@ const DeviceElement = ({ device, tokens, setTokens, devices, setDevices, role })
             const newDevicesList = devices.filter((el) => el.id !== device.id)
             newDevicesList.splice(index, 0, newDevice)
             setDevices([...newDevicesList])
+            setExecuteMessage("Device was saved")
             setRequestStatus("success")
         } catch (exception) {
+            setExecuteMessage("Error editing the device")
             setRequestStatus("danger")
             console.log(exception)
         }
@@ -100,7 +111,7 @@ const DeviceElement = ({ device, tokens, setTokens, devices, setDevices, role })
                     <Modal type="alert"
                         title={`Chart: energy consumption for ${device.id}`}
                         content={
-                            <ChartElement />
+                            <ChartElement device={device} />
                         }
                         modalId={`chart-show-${device.id}`}
                         btnMessage={"Ok"}
@@ -136,7 +147,8 @@ const DeviceElement = ({ device, tokens, setTokens, devices, setDevices, role })
                             </div>}
                             modalId={`myModal-edit-${device.id}`}
                             btnMessage={"Save"}
-                            execute={executeSave} />
+                            execute={executeSave}
+                        />
                     </>
                 )
             }
@@ -145,7 +157,7 @@ const DeviceElement = ({ device, tokens, setTokens, devices, setDevices, role })
                 requestStatus !== "" &&
                 (
                     < Alert type={requestStatus}
-                        message={requestStatus === "success" ? "User deleted successfully" : "Error deleting the user"}
+                        message={executeMessage}
                         setRequestStatus={setRequestStatus} />
                 )
             }

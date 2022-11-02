@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import Alert from '../common/Alert'
 import Modal from '../common/Modal'
 import { requestHandler } from '../handlers'
-import { insertUser } from '../requests'
+import { getRequest, insertUser, LINK_VERIFY_USERNAME_UNIQUE } from '../requests'
 
 const InsertUser = ({ tokens, setTokens, users, setUsers }) => {
 
@@ -10,7 +10,15 @@ const InsertUser = ({ tokens, setTokens, users, setUsers }) => {
     const [errorMessage, setErrorMessage] = useState("")
 
     async function checkUsernameIsNew(username) {
-        return false
+        try {
+            const response = await requestHandler(getRequest, {
+                link: LINK_VERIFY_USERNAME_UNIQUE + username,
+                payload: {}
+            }, tokens, setTokens)
+            return response
+        } catch (exception) {
+            return "error"
+        }
     }
 
     async function insertUserAction() {
@@ -31,6 +39,11 @@ const InsertUser = ({ tokens, setTokens, users, setUsers }) => {
             return "don't close"
         }
         const isNew = await checkUsernameIsNew(username)
+        if (isNew === "error") {
+            setErrorMessage("Error adding the user!")
+            setRequestStatus("danger")
+            return
+        }
         if (!isNew) {
             setErrorMessage("Username already exists!")
             setRequestStatus("danger")
@@ -114,7 +127,7 @@ const InsertUser = ({ tokens, setTokens, users, setUsers }) => {
                         </div>
                     </div>
                 )
-            } execute={insertUserAction} />
+            } execute={insertUserAction} keepOpen={true} />
             {
                 requestStatus !== "" && errorMessage !== "" &&
                 (
