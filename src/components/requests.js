@@ -8,6 +8,8 @@ export const LINK_GET_DEVICES = baseUrl + "/get/devices"
 export const LINK_GET_DEVICES_WITHOUT_OWNER = baseUrl + "/get/devices/no-owner"
 export const LINK_GET_USER_BY_USERNAME = baseUrl + "/get/user-username="
 export const LINK_GET_DEVICES_FROM_USER = baseUrl + "/get/devices-for-user/user-id="
+export const LINK_VERIFY_USERNAME_UNIQUE = baseUrl + "/verify/unique/username="
+export const LINK_VERIFY_ADDRESS_UNIQUE = baseUrl + "/verify/unique/device-address"
 
 export const LINK_ADD_USER = baseUrl + "/add/user"
 export const LINK_ADD_CREDENTIALS = baseUrl + "/add/credentials"

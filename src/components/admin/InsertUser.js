@@ -73,6 +73,11 @@ const InsertUser = ({ tokens, setTokens, users, setUsers }) => {
         }
     }
 
+    function onChangeDoNotAllowSpace(e) {
+        e.currentTarget.value = e.currentTarget.value.trim()
+        onChangeAction(e)
+    }
+
     function onBlurAction(e) {
         e.currentTarget.value = e.currentTarget.value.trim()
     }
@@ -88,15 +93,15 @@ const InsertUser = ({ tokens, setTokens, users, setUsers }) => {
                     <div>
                         <div className='space-for-all-subdivs'>
                             <div>
-                                Username: <input type="text" id="creation-username" onChange={(e) => onChangeAction(e)} onBlur={(e) => onBlurAction(e)} />
+                                Username: <input className='px-1' type="text" id="creation-username" onChange={(e) => onChangeDoNotAllowSpace(e)} onBlur={(e) => onBlurAction(e)} />
                                 <i className="fa-solid fa-circle-exclamation fa-xl" data-bs-toggle="tooltip" title="Username can not be empty!" id="icon-new-password" style={{ color: "rgb(190, 205, 50)", marginLeft: "10px", opacity: "0%", pointerEvents: "none" }}></i>
                             </div>
                             <div>
-                                Password: <input type="password" id="creation-password" onChange={(e) => onChangeAction(e)} />
+                                Password: <input className='px-1' type="password" id="creation-password" onChange={(e) => onChangeAction(e)} />
                                 <i className="fa-solid fa-circle-exclamation fa-xl" data-bs-toggle="tooltip" title="Password can not be empty!" id="icon-new-password" style={{ color: "rgb(190, 205, 50)", marginLeft: "10px", opacity: "0%", pointerEvents: "none" }}></i>
                             </div>
                             <div>
-                                Name: <input type="text" id="creation-name" onChange={(e) => onChangeAction(e)} onBlur={(e) => onBlurAction(e)} />
+                                Name: <input className='px-1' type="text" id="creation-name" onChange={(e) => onChangeAction(e)} onBlur={(e) => onBlurAction(e)} />
                                 <i className="fa-solid fa-circle-exclamation fa-xl" data-bs-toggle="tooltip" title="Name can not be empty!" id="icon-new-password" style={{ color: "rgb(190, 205, 50)", marginLeft: "10px", opacity: "0%", pointerEvents: "none" }}></i>
                             </div>
                             <div>
