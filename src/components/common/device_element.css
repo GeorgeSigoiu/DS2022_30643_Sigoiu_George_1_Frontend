@@ -23,7 +23,6 @@
 }
 
 .device-element .card .card-content .info-field div {
-  width: 900px;
   max-height: 120px;
   overflow-y: auto;
 }
