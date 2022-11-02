@@ -47,7 +47,7 @@ function App() {
           <Route path="/admin/users" element={<UsersList tokens={tokens} setTokens={setTokens} />} />
           <Route path="/admin/devices" element={<DevicesList tokens={tokens} setTokens={setTokens} role="admin" />} />
 
-          <Route path="/user/settings" element={<Settings loggedUser={loggedUser} tokens={tokens} setTokens={setTokens} />} />
+          <Route path="/user/settings" element={<Settings loggedUser={loggedUser} setLoggedUser={setLoggedUser} tokens={tokens} setTokens={setTokens} />} />
 
           <Route path="/client" element={<ClientDashboard />} />
           <Route path="/client/devices" element={<DevicesList tokens={tokens} setTokens={setTokens} role="client" loggedUser={loggedUser} />} />

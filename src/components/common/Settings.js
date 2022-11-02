@@ -4,7 +4,7 @@ import { LINK_PUT_CREDENTIALS, putRequest } from '../requests'
 import Alert from './Alert'
 import './settings.css'
 
-const Settings = ({ loggedUser, tokens, setTokens }) => {
+const Settings = ({ loggedUser, setLoggedUser, tokens, setTokens }) => {
 
     const [requestStatus, setRequestStatus] = useState("")
 
@@ -80,6 +80,18 @@ const Settings = ({ loggedUser, tokens, setTokens }) => {
             }
             await requestHandler(putRequest, args, tokens, setTokens)
             setRequestStatus("success")
+            const newUser = {
+                id: loggedUser.id,
+                devices: loggedUser.devices,
+                credentials: {
+                    id: loggedUser.credentials.id,
+                    username: loggedUser.credentials.username,
+                    password: newPassword
+                },
+                name: loggedUser.name,
+                role: loggedUser.role
+            }
+            setLoggedUser(newUser)
         } catch (exception) {
             setRequestStatus("danger")
             console.log(exception)
