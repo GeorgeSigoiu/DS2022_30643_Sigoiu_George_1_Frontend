@@ -10,7 +10,7 @@ const Alert = ({ type, message, setRequestStatus }) => {
                 el.click()
                 setRequestStatus("")
             })
-        }, 3000)
+        }, 5000)
     }, [shown])
 
     const alertType = type === "success" ? "Success" : "Warning"
