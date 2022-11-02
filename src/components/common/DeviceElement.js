@@ -117,7 +117,7 @@ const DeviceElement = ({ device, tokens, setTokens, devices, setDevices, role })
                             btnMessage={"Yes, delete"}
                             execute={executeDelete} />
                         <Modal type="alert"
-                            title={"Are you sure you want to delete?"}
+                            title={"Edit information"}
                             content={<div>
                                 <div className='space-for-all-subdivs'>
                                     <div>
