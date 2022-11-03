@@ -10,6 +10,7 @@ export const LINK_GET_USER_BY_USERNAME = baseUrl + "/get/user-username="
 export const LINK_GET_DEVICES_FROM_USER = baseUrl + "/get/devices-for-user/user-id="
 export const LINK_VERIFY_USERNAME_UNIQUE = baseUrl + "/verify/unique/username="
 export const LINK_VERIFY_ADDRESS_UNIQUE = baseUrl + "/verify/unique/device-address"
+export const LINK_GET_CONSUMPTION_FOR_DATE = baseUrl + "/get/consumption/for-date=DATE/device-id=DEVICEID"
 
 export const LINK_ADD_USER = baseUrl + "/add/user"
 export const LINK_ADD_CREDENTIALS = baseUrl + "/add/credentials"
@@ -111,13 +112,11 @@ export async function insertUser(link, access_token, user) {
         password: user.password
     }
     const newCredentials = await insertCredentials(credentials, access_token)
-    console.log(newCredentials)
     const userToInsert = {
         credentials: newCredentials,
         name: user.name,
         role: user.role
     }
-    console.log(userToInsert)
     const newUser = await axios.post(LINK_ADD_USER, userToInsert, {
         headers: {
             "Authorization": "Bearer " + access_token,
