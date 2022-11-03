@@ -28,7 +28,6 @@ const ExpandedInfo = ({ user, users, setUsers, tokens, setTokens, devices, setDe
     }
 
     async function executeSave() {
-        console.log("save user info")
         const name = document.getElementById(`name-input-${user.id}`).value.trim()
         document.getElementById(`name-input-${user.id}`).value = document.getElementById(`name-input-${user.id}`).value.trim()
         const checkInput = document.getElementById(`check-role-input-${user.id}`)
@@ -109,12 +108,10 @@ const ExpandedInfo = ({ user, users, setUsers, tokens, setTokens, devices, setDe
     }
 
     function removeDevice(e) {
-        console.log("remove device")
         common(e, "rgb(255, 130, 130)", undoRemoveDevice, "O")
     }
 
     function undoRemoveDevice(e) {
-        console.log("redo")
         common(e, "rgb(101, 214, 255)", removeDevice, "X")
     }
 
@@ -126,7 +123,6 @@ const ExpandedInfo = ({ user, users, setUsers, tokens, setTokens, devices, setDe
         }
         input.value = ""
         const theDevice = devices.filter((el) => el.address === inputValue)
-        console.log(theDevice[0])
         if (theDevice[0] === null || theDevice[0] === undefined) {
             alert("The value does not correspound to a valid address")
             return
@@ -138,7 +134,6 @@ const ExpandedInfo = ({ user, users, setUsers, tokens, setTokens, devices, setDe
                 payload: {}
             }, tokens, setTokens)
             const newUser = response.data
-            console.log("new user: ", newUser)
             const newList = users.filter((el) => el.id !== user.id)
             const index = users.indexOf(user)
             newList.splice(index, 0, newUser)
@@ -164,13 +159,11 @@ const ExpandedInfo = ({ user, users, setUsers, tokens, setTokens, devices, setDe
                 link: LINK_GET_CREDENTIALS_ID + user.id,
                 payload: {}
             }, tokens, setTokens)
-            console.log("credentials id: ", credentialsId)
             const credentials = {
                 id: credentialsId,
                 username: newUsername,
                 password: newPassword
             }
-            console.log("payload for credentials update: ", credentials)
             await requestHandler(putRequest, {
                 link: LINK_PUT_CREDENTIALS + credentialsId,
                 payload: credentials

@@ -11,15 +11,12 @@ const UserElement = ({ user, tokens, setTokens, users, setUsers, devices, setDev
     const [requestStatus, setRequestStatus] = useState("")
 
     async function executeDelete() {
-        console.log("delete user")
         const userId = user.id
         try {
-            console.log("send delete request")
             const responseStatus = await requestHandler(deleteRequest, {
                 link: LINK_DELETE_USER + userId,
                 payload: {}
             }, tokens, setTokens)
-            console.log(responseStatus)
             if (responseStatus >= 200 && responseStatus < 300) {
                 setRequestStatus("success")
                 const newListUsers = users.filter((el) => el.id !== userId)

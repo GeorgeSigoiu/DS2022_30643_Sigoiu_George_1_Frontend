@@ -15,7 +15,6 @@ const InsertDevice = ({ tokens, setTokens, devices, setDevices }) => {
                 link: LINK_VERIFY_ADDRESS_UNIQUE,
                 payload: { address: address }
             }, tokens, setTokens)
-            console.log("address unique - ", response)
             return response
         } catch (exception) {
             console.log(exception)
@@ -26,7 +25,6 @@ const InsertDevice = ({ tokens, setTokens, devices, setDevices }) => {
     }
 
     async function insertDeviceAction() {
-        console.log("insert device")
         const address = document.getElementById("insert-device-address").value
         document.getElementById("insert-device-address").value = ""
         const description = document.getElementById("insert-device-description").value
@@ -51,7 +49,6 @@ const InsertDevice = ({ tokens, setTokens, devices, setDevices }) => {
             maxHourlyEnergyConsumption: consumption
         }
         try {
-            console.log(payload)
             const newDevice = await requestHandler(postRequest, {
                 link: LINK_ADD_DEVICE,
                 payload: payload

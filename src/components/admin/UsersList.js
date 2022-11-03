@@ -22,7 +22,6 @@ const UsersList = ({ tokens, setTokens }) => {
     useEffect(() => {
         getUsers()
         getDevices()
-        console.log("getUsers()")
     }, [once])
 
 

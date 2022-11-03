@@ -7,7 +7,6 @@ import '../common/navigation.css'
 const AdminNavigation = ({ setUserType }) => {
 
     function logoutAction() {
-        console.log("logout")
         setUserType("")
     }
 

@@ -16,7 +16,6 @@ const DevicesList = ({ tokens, setTokens, role, loggedUser }) => {
 
     useEffect(() => {
         getDevices()
-        console.log("getDevices()")
     }, [once])
 
 
@@ -35,7 +34,6 @@ const DevicesList = ({ tokens, setTokens, role, loggedUser }) => {
         }
         const data = await requestHandler(getRequest, args, tokens, setTokens)
         setDevices([...data])
-        console.log(data)
     }
 
     const filters = [

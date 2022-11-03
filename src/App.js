@@ -15,11 +15,9 @@ function App() {
   const [loggedUser, setLoggedUser] = useState("")
 
   useEffect(() => {
-    console.log(userType)
   }, [userType])
 
   useEffect(() => {
-    console.log("set Logged user: ", loggedUser)
   }, [loggedUser])
 
   useEffect(() => {
@@ -28,7 +26,6 @@ function App() {
       const decoded = jwt_decode(access_token)
       const roles = decoded.roles
       const role = roles[0]
-      console.log(role)
       setUserType(role)
     }
 

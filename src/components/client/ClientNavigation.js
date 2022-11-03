@@ -6,7 +6,6 @@ import '../common/navigation.css'
 const ClientNavigation = ({ setUserType }) => {
 
     function logoutAction() {
-        console.log("logout")
         setUserType("")
     }
 

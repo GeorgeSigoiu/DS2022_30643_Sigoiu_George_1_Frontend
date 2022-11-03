@@ -24,7 +24,6 @@ const Login = ({ setTokens, setUserType, setLoggedUser }) => {
     }, [showAlert])
 
     async function check_input() {
-        console.log("check input")
         const username = document.getElementById("username-input-field").value
         const password = document.getElementById("password-input-field").value
         let response

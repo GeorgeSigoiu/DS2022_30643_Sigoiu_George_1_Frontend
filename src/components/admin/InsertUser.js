@@ -22,7 +22,6 @@ const InsertUser = ({ tokens, setTokens, users, setUsers }) => {
     }
 
     async function insertUserAction() {
-        console.log("insert user")
         const username = document.getElementById("creation-username").value.trim()
         document.getElementById("creation-username").value = ""
         const password = document.getElementById("creation-password").value
@@ -63,7 +62,6 @@ const InsertUser = ({ tokens, setTokens, users, setUsers }) => {
                 payload: userToInsert
             }, tokens, setTokens)
             setUsers([...users, newUser])
-            console.log(username, password, name, role)
             setErrorMessage("User added successfully!")
             setRequestStatus("success")
         } catch (exception) {
