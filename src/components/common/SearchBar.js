@@ -1,7 +1,6 @@
 import React from 'react'
-import { tryRefreshTokens } from '../requests'
 import "./search_bar.css"
-const SearchBar = ({ filters, tokens }) => {
+const SearchBar = ({ filters }) => {
 
     async function myF() {
 

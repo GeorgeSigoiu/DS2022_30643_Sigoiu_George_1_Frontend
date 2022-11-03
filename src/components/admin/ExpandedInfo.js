@@ -5,7 +5,7 @@ import Modal from '../common/Modal'
 import { getRequest, LINK_PUT_USER, putRequest, LINK_GET_CREDENTIALS_ID, LINK_PUT_CREDENTIALS, LINK_ADD_DEVICE_TO_USER, LINK_GET_USER_BY_ID, LINK_UPDATE_DEVICES_USER, LINK_GET_DEVICES_WITHOUT_OWNER } from '../requests'
 import { requestHandler } from '../handlers'
 
-const ExpandedInfo = ({ user, users, setUsers, tokens, setTokens, devices, setDevices }) => {
+const ExpandedInfo = ({ user, users, setUsers, devices, setDevices }) => {
 
     const [requestStatus, setRequestStatus] = useState("")
 
@@ -48,7 +48,7 @@ const ExpandedInfo = ({ user, users, setUsers, tokens, setTokens, devices, setDe
                 await requestHandler(putRequest, {
                     link: LINK_PUT_USER + user.id,
                     payload: payload
-                }, tokens, setTokens)
+                })
             }
             const removedDevicesIds = getRemovedDevicesIds()
             if (removedDevicesIds.length > 0) {
@@ -56,14 +56,14 @@ const ExpandedInfo = ({ user, users, setUsers, tokens, setTokens, devices, setDe
                 await requestHandler(putRequest, {
                     link: LINK_UPDATE_DEVICES_USER + "0",
                     payload: removedDevicesIds
-                }, tokens, setTokens)
+                })
             }
             let newUser = user
             if (madeOneRequest) {
                 newUser = await requestHandler(getRequest, {
                     link: LINK_GET_USER_BY_ID + user.id,
                     payload: {}
-                }, tokens, setTokens)
+                })
                 const newUserList = users.filter((el) => el.id !== user.id)
                 const index = users.indexOf(user)
                 newUserList.splice(index, 0, newUser)
@@ -71,7 +71,7 @@ const ExpandedInfo = ({ user, users, setUsers, tokens, setTokens, devices, setDe
                 const data = await requestHandler(getRequest, {
                     link: LINK_GET_DEVICES_WITHOUT_OWNER,
                     payload: {}
-                }, tokens, setTokens)
+                })
                 setDevices([...data])
                 setRequestStatus("success")
 
@@ -132,7 +132,7 @@ const ExpandedInfo = ({ user, users, setUsers, tokens, setTokens, devices, setDe
             const response = await requestHandler(putRequest, {
                 link: newLink,
                 payload: {}
-            }, tokens, setTokens)
+            })
             const newUser = response.data
             const newList = users.filter((el) => el.id !== user.id)
             const index = users.indexOf(user)
@@ -158,7 +158,7 @@ const ExpandedInfo = ({ user, users, setUsers, tokens, setTokens, devices, setDe
             const credentialsId = await requestHandler(getRequest, {
                 link: LINK_GET_CREDENTIALS_ID + user.id,
                 payload: {}
-            }, tokens, setTokens)
+            })
             const credentials = {
                 id: credentialsId,
                 username: newUsername,
@@ -167,7 +167,7 @@ const ExpandedInfo = ({ user, users, setUsers, tokens, setTokens, devices, setDe
             await requestHandler(putRequest, {
                 link: LINK_PUT_CREDENTIALS + credentialsId,
                 payload: credentials
-            }, tokens, setTokens)
+            })
             const newUser = {
                 id: user.id,
                 devices: user.devices,

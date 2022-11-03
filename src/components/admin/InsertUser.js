@@ -4,7 +4,7 @@ import Modal from '../common/Modal'
 import { requestHandler } from '../handlers'
 import { getRequest, insertUser, LINK_VERIFY_USERNAME_UNIQUE } from '../requests'
 
-const InsertUser = ({ tokens, setTokens, users, setUsers }) => {
+const InsertUser = ({ users, setUsers }) => {
 
     const [requestStatus, setRequestStatus] = useState("")
     const [errorMessage, setErrorMessage] = useState("")
@@ -14,7 +14,7 @@ const InsertUser = ({ tokens, setTokens, users, setUsers }) => {
             const response = await requestHandler(getRequest, {
                 link: LINK_VERIFY_USERNAME_UNIQUE + username,
                 payload: {}
-            }, tokens, setTokens)
+            })
             return response
         } catch (exception) {
             return "error"
@@ -60,7 +60,7 @@ const InsertUser = ({ tokens, setTokens, users, setUsers }) => {
             const newUser = await requestHandler(insertUser, {
                 link: "",
                 payload: userToInsert
-            }, tokens, setTokens)
+            })
             setUsers([...users, newUser])
             setErrorMessage("User added successfully!")
             setRequestStatus("success")

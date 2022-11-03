@@ -35,13 +35,15 @@ const Login = ({ setTokens, setUserType, setLoggedUser }) => {
         }
         const access_token = response.access_token
         const refresh_token = response.refresh_token
+        localStorage.setItem("access_token", access_token)
+        localStorage.setItem("refresh_token", refresh_token)
 
         const userUsername = response.username
         try {
             const user = await requestHandler(getRequest, {
                 link: LINK_GET_USER_BY_USERNAME + userUsername,
                 payload: {}
-            }, [access_token, refresh_token], setTokens)
+            })
             setLoggedUser(user)
             setRequestStatus("success")
 

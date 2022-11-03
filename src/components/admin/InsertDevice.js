@@ -4,7 +4,7 @@ import Modal from '../common/Modal'
 import { requestHandler } from '../handlers'
 import { getRequest, LINK_ADD_DEVICE, LINK_VERIFY_ADDRESS_UNIQUE, postRequest } from '../requests'
 
-const InsertDevice = ({ tokens, setTokens, devices, setDevices }) => {
+const InsertDevice = ({ devices, setDevices }) => {
 
     const [requestStatus, setRequestStatus] = useState("")
     const [errorMessage, setErrorMessage] = useState("")
@@ -14,7 +14,7 @@ const InsertDevice = ({ tokens, setTokens, devices, setDevices }) => {
             const response = await requestHandler(postRequest, {
                 link: LINK_VERIFY_ADDRESS_UNIQUE,
                 payload: { address: address }
-            }, tokens, setTokens)
+            })
             return response
         } catch (exception) {
             console.log(exception)
@@ -52,7 +52,7 @@ const InsertDevice = ({ tokens, setTokens, devices, setDevices }) => {
             const newDevice = await requestHandler(postRequest, {
                 link: LINK_ADD_DEVICE,
                 payload: payload
-            }, tokens, setTokens)
+            })
             setDevices([...devices, newDevice])
             setRequestStatus("success")
             setErrorMessage("Device added successfully")

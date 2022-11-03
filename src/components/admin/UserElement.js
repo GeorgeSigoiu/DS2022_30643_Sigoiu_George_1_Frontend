@@ -6,7 +6,7 @@ import Alert from '../common/Alert'
 import { deleteRequest, LINK_DELETE_USER } from '../requests'
 import { requestHandler } from '../handlers'
 
-const UserElement = ({ user, tokens, setTokens, users, setUsers, devices, setDevices }) => {
+const UserElement = ({ user, users, setUsers, devices, setDevices }) => {
 
     const [requestStatus, setRequestStatus] = useState("")
 
@@ -16,7 +16,7 @@ const UserElement = ({ user, tokens, setTokens, users, setUsers, devices, setDev
             const responseStatus = await requestHandler(deleteRequest, {
                 link: LINK_DELETE_USER + userId,
                 payload: {}
-            }, tokens, setTokens)
+            })
             if (responseStatus >= 200 && responseStatus < 300) {
                 setRequestStatus("success")
                 const newListUsers = users.filter((el) => el.id !== userId)
@@ -52,7 +52,7 @@ const UserElement = ({ user, tokens, setTokens, users, setUsers, devices, setDev
 
                     </div>
                 </div>
-                <ExpandedInfo user={user} tokens={tokens} setTokens={setTokens} users={users} setUsers={setUsers} devices={devices} setDevices={setDevices} />
+                <ExpandedInfo user={user} users={users} setUsers={setUsers} devices={devices} setDevices={setDevices} />
             </div>
 
             <Modal type="alert"

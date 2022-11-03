@@ -6,7 +6,7 @@ import MyDatePicker from './MyDatePicker';
 import { getRequest, LINK_GET_CONSUMPTION_FOR_DATE } from '../../requests';
 import { requestHandler } from '../../handlers'
 
-const ChartElement = ({ device, tokens, setTokens }) => {
+const ChartElement = ({ device }) => {
 
     const [selectedDate, setSelectedDate] = useState(new Date().toISOString())
     const [data, setData] = useState([])
@@ -34,7 +34,7 @@ const ChartElement = ({ device, tokens, setTokens }) => {
         const response = await requestHandler(getRequest, {
             link: LINK_GET_CONSUMPTION_FOR_DATE.replace("DATE", date.toString()).replace("DEVICEID", device.id),
             payload: {}
-        }, tokens, setTokens)
+        })
         constructData(response)
     }
 

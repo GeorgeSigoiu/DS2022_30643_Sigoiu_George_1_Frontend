@@ -5,7 +5,7 @@ import { LINK_GET_DEVICES, getRequest, LINK_GET_DEVICES_FROM_USER } from '../req
 import DeviceElement from './DeviceElement'
 import InsertDevice from '../admin/InsertDevice'
 
-const DevicesList = ({ tokens, setTokens, role, loggedUser }) => {
+const DevicesList = ({ role, loggedUser }) => {
 
     const [devices, setDevices] = useState([])
     const [once, doOnce] = useState(false)
@@ -32,7 +32,7 @@ const DevicesList = ({ tokens, setTokens, role, loggedUser }) => {
                 payload: {}
             }
         }
-        const data = await requestHandler(getRequest, args, tokens, setTokens)
+        const data = await requestHandler(getRequest, args)
         setDevices([...data])
     }
 
@@ -47,14 +47,14 @@ const DevicesList = ({ tokens, setTokens, role, loggedUser }) => {
                     role === "admin" &&
                     (<div style={{ display: "flex", justifyContent: "space-between" }}>
                         <SearchBar filters={filters} />
-                        <InsertDevice tokens={tokens} setTokens={setTokens} devices={devices} setDevices={setDevices} />
+                        <InsertDevice devices={devices} setDevices={setDevices} />
                     </div>)
                 }
 
                 <div id="accordion-devices">
                     {
                         devices.map((el, index) => (
-                            <DeviceElement device={el} key={index} tokens={tokens} setTokens={setTokens} devices={devices} setDevices={setDevices} role={role} />
+                            <DeviceElement device={el} key={index} devices={devices} setDevices={setDevices} role={role} />
                         ))
                     }
                 </div>

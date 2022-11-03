@@ -6,7 +6,7 @@ import { deleteRequest, LINK_DELETE_DEVICE, LINK_DELETE_USER, LINK_PUT_DEVICE, p
 import { requestHandler } from '../handlers'
 import ChartElement from './charts/ChartElement'
 
-const DeviceElement = ({ device, tokens, setTokens, devices, setDevices, role }) => {
+const DeviceElement = ({ device, devices, setDevices, role }) => {
 
     const [requestStatus, setRequestStatus] = useState("")
     const [executeMessage, setExecuteMessage] = useState("")
@@ -18,7 +18,7 @@ const DeviceElement = ({ device, tokens, setTokens, devices, setDevices, role })
                 link: LINK_DELETE_DEVICE + deviceId,
                 payload: {}
             }
-            const responseStatus = await requestHandler(deleteRequest, args, tokens, setTokens)
+            const responseStatus = await requestHandler(deleteRequest, args)
             if (responseStatus >= 200 && responseStatus < 300) {
                 setExecuteMessage("Device successfuly deleted!")
                 setRequestStatus("success")
@@ -54,7 +54,7 @@ const DeviceElement = ({ device, tokens, setTokens, devices, setDevices, role })
                 link: LINK_PUT_DEVICE + device.id,
                 payload: payload
             }
-            const response = await requestHandler(putRequest, args, tokens, setTokens)
+            const response = await requestHandler(putRequest, args)
             const newDevice = response.data
             const index = devices.indexOf(device)
             const newDevicesList = devices.filter((el) => el.id !== device.id)
@@ -107,7 +107,7 @@ const DeviceElement = ({ device, tokens, setTokens, devices, setDevices, role })
                     <Modal type="alert"
                         title={`Chart: energy consumption`}
                         content={
-                            <ChartElement device={device} tokens={tokens} setTokens={setTokens} />
+                            <ChartElement device={device} />
                         }
                         modalId={`chart-show-${device.id}`}
                         btnMessage={"Ok"}

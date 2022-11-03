@@ -4,7 +4,7 @@ import { LINK_PUT_CREDENTIALS, putRequest } from '../requests'
 import Alert from './Alert'
 import './settings.css'
 
-const Settings = ({ loggedUser, setLoggedUser, tokens, setTokens }) => {
+const Settings = ({ loggedUser, setLoggedUser }) => {
 
     const [requestStatus, setRequestStatus] = useState("")
 
@@ -94,7 +94,7 @@ const Settings = ({ loggedUser, setLoggedUser, tokens, setTokens }) => {
                 link: LINK_PUT_CREDENTIALS + loggedUser.credentials.id,
                 payload: payload
             }
-            await requestHandler(putRequest, args, tokens, setTokens)
+            await requestHandler(putRequest, args)
             setRequestStatus("success")
             const newUser = {
                 id: loggedUser.id,
