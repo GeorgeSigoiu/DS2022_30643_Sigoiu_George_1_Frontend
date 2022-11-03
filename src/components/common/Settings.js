@@ -53,6 +53,18 @@ const Settings = ({ loggedUser, setLoggedUser, tokens, setTokens }) => {
         return false
     }
 
+    function checkPasswordNotEmpty(pass) {
+        if (pass !== "") {
+            return true
+        }
+        const passItem = document.getElementById("settings-new-password")
+        passItem.style.borderColor = "rgb(190, 205, 50)"
+        const iconItem = document.getElementById("icon-new-password")
+        iconItem.style.pointerEvents = "all"
+        iconItem.style.opacity = "100%"
+        return false
+    }
+
     async function changePassword() {
         const oldPassword = document.getElementById("settings-old-password").value
         const newPassword = document.getElementById("settings-new-password").value
@@ -60,6 +72,10 @@ const Settings = ({ loggedUser, setLoggedUser, tokens, setTokens }) => {
         resetIcons()
         const areTheSame = checkSamePasswords(newPassword, repeatPassword)
         if (!areTheSame) {
+            return
+        }
+        const isNotEmpty = checkPasswordNotEmpty(newPassword)
+        if (!isNotEmpty) {
             return
         }
 
