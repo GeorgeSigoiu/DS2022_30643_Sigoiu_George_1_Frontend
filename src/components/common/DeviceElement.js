@@ -12,7 +12,6 @@ const DeviceElement = ({ device, tokens, setTokens, devices, setDevices, role })
     const [executeMessage, setExecuteMessage] = useState("")
 
     async function executeDelete() {
-        console.log("delete device")
         const deviceId = device.id
         try {
             const args = {
@@ -20,7 +19,6 @@ const DeviceElement = ({ device, tokens, setTokens, devices, setDevices, role })
                 payload: {}
             }
             const responseStatus = await requestHandler(deleteRequest, args, tokens, setTokens)
-            console.log(responseStatus)
             if (responseStatus >= 200 && responseStatus < 300) {
                 setExecuteMessage("Device successfuly deleted!")
                 setRequestStatus("success")
@@ -38,10 +36,9 @@ const DeviceElement = ({ device, tokens, setTokens, devices, setDevices, role })
     }
 
     async function executeSave() {
-        console.log("save device")
-        const address = document.getElementById("edit-device-address").value
-        const description = document.getElementById("edit-device-description").value
-        const consumption = document.getElementById("edit-device-consumption").value
+        const address = document.getElementById(`edit-device-address-${device.id}`).value
+        const description = document.getElementById(`edit-device-description-${device.id}`).value
+        const consumption = document.getElementById(`edit-device-consumption-${device.id}`).value
         if (address === "" || address.trim() === "") {
             setExecuteMessage("Address can not be empty! Device did not change!")
             setRequestStatus("danger")
@@ -59,7 +56,6 @@ const DeviceElement = ({ device, tokens, setTokens, devices, setDevices, role })
             }
             const response = await requestHandler(putRequest, args, tokens, setTokens)
             const newDevice = response.data
-            console.log("new device: ", newDevice)
             const index = devices.indexOf(device)
             const newDevicesList = devices.filter((el) => el.id !== device.id)
             newDevicesList.splice(index, 0, newDevice)
@@ -109,13 +105,13 @@ const DeviceElement = ({ device, tokens, setTokens, devices, setDevices, role })
                         </div>)
                     }
                     <Modal type="alert"
-                        title={`Chart: energy consumption for ${device.id}`}
+                        title={`Chart: energy consumption`}
                         content={
-                            <ChartElement device={device} />
+                            <ChartElement device={device} tokens={tokens} setTokens={setTokens} />
                         }
                         modalId={`chart-show-${device.id}`}
                         btnMessage={"Ok"}
-                        execute={() => console.log("chart open")} />
+                        execute={() => { }} />
                 </div>
             </div>
             {
@@ -132,16 +128,16 @@ const DeviceElement = ({ device, tokens, setTokens, devices, setDevices, role })
                             content={<div>
                                 <div className='space-for-all-subdivs'>
                                     <div>
-                                        Address: <input type="text" id="edit-device-address" style={{ width: "300px" }} defaultValue={device.address} />
+                                        Address: <input className='px-1' type="text" id={`edit-device-address-${device.id}`} style={{ width: "300px" }} defaultValue={device.address} />
                                     </div>
                                     <div style={{ display: "flex", flexDirection: "column" }}>
                                         <p>
                                             Description
                                         </p>
-                                        <textarea id="edit-device-description" defaultValue={device.description} />
+                                        <textarea className='px-1' id={`edit-device-description-${device.id}`} defaultValue={device.description} />
                                     </div>
                                     <div>
-                                        Max hourly consumption: <input type="number" id="edit-device-consumption" style={{ width: "100px" }} defaultValue={device.maxHourlyEnergyConsumption} />
+                                        Max hourly consumption: <input className='px-1' type="number" id={`edit-device-consumption-${device.id}`} style={{ width: "100px" }} defaultValue={device.maxHourlyEnergyConsumption} />
                                     </div>
                                 </div>
                             </div>}
