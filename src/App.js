@@ -40,13 +40,13 @@ function App() {
       <Router>
         <Navigation userType={userType} setUserType={setUserType} />
         <Routes>
-          <Route path="/admin" element={<AdminDashboard />} />
+          <Route path="/admin" element={<AdminDashboard loggedUser={loggedUser} />} />
           <Route path="/admin/users" element={<UsersList />} />
           <Route path="/admin/devices" element={<DevicesList role="admin" />} />
 
           <Route path="/user/settings" element={<Settings loggedUser={loggedUser} setLoggedUser={setLoggedUser} />} />
 
-          <Route path="/client" element={<ClientDashboard />} />
+          <Route path="/client" element={<ClientDashboard loggedUser={loggedUser} />} />
           <Route path="/client/devices" element={<DevicesList role="client" loggedUser={loggedUser} />} />
 
           <Route path="/login" element={<Login setTokens={setTokens} setUserType={setUserType} setLoggedUser={setLoggedUser} />} />

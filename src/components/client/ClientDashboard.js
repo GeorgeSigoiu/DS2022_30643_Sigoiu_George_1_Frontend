@@ -1,8 +1,10 @@
 import React from 'react'
+import clientimg from '../../images/client.png'
+import Dashboard from '../common/Dashboard'
 
-const ClientDashboard = () => {
+const ClientDashboard = ({ loggedUser }) => {
     return (
-        <div>CLIENT PAGE</div>
+        <Dashboard loggedUser={loggedUser} image={clientimg} />
     )
 }
 

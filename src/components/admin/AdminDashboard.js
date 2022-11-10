@@ -1,19 +1,11 @@
 import React from 'react'
+import Dashboard from '../common/Dashboard'
+import adminimg from '../../images/manager.png'
 
-const AdminDashboard = () => {
+const AdminDashboard = ({ loggedUser }) => {
 
     return (
-        <>
-            <div style={{ height: "200vh" }}>
-                <div style={{ width: "500px", overflow: "auto" }}>
-                    {localStorage.getItem("access_token")}
-                </div>
-                <div style={{ width: "500px", overflow: "auto" }}>
-                    {localStorage.getItem("refresh_token")}
-                </div>
-            </div>
-        </>
-
+        <Dashboard loggedUser={loggedUser} image={adminimg} />
     )
 }
 
