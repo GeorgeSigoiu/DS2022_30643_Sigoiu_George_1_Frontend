@@ -4,13 +4,13 @@ import './dashboard.css'
 const Dashboard = ({ loggedUser, image }) => {
     return (
         <div id="client-dashboard">
-            <div class="container mt-4 mb-4 p-3 d-flex justify-content-center">
-                <div class="card p-4">
-                    <div class=" image d-flex flex-column justify-content-center align-items-center">
-                        <button class="btn btn-secondary">
+            <div className="container mt-4 mb-4 p-3 d-flex justify-content-center">
+                <div className="card p-4">
+                    <div className=" image d-flex flex-column justify-content-center align-items-center">
+                        <button className="btn btn-secondary">
                             <img src={image} height="100" width="100" />
                         </button>
-                        <span class="name mt-3">{loggedUser.name}</span>
+                        <span className="name mt-3">{loggedUser.name}</span>
                     </div>
                 </div>
             </div>
