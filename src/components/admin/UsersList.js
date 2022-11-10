@@ -4,8 +4,19 @@ import InsertUser from './InsertUser'
 import UserElement from './UserElement'
 import { getRequest, LINK_GET_DEVICES_WITHOUT_OWNER, LINK_GET_USERS } from '../requests'
 import { requestHandler } from '../handlers'
+import { useNavigate } from 'react-router-dom'
 
 const UsersList = () => {
+    const navigate = useNavigate()
+
+    useEffect(() => {
+        console.log("local storage: role=", localStorage.getItem("role"))
+        if (localStorage.getItem("role") === "client") {
+            navigate("/login")
+        }
+    }, [])
+
+
     const [users, setUsers] = useState([])
     const [devices, setDevices] = useState([])
     const [once, doOnce] = useState(false)

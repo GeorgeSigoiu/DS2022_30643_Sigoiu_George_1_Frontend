@@ -51,6 +51,8 @@ const Login = ({ setTokens, setUserType, setLoggedUser }) => {
             const decoded = jwt_decode(access_token)
             const roles = decoded.roles
             const role = roles[0]
+            localStorage.setItem("role", role)
+            console.log("added in local storage: role=", role)
             navigate(`/${role}`)
         } catch (exception) {
             setRequestStatus("danger")

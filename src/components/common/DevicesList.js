@@ -4,8 +4,18 @@ import { requestHandler } from '../handlers'
 import { LINK_GET_DEVICES, getRequest, LINK_GET_DEVICES_FROM_USER } from '../requests'
 import DeviceElement from './DeviceElement'
 import InsertDevice from '../admin/InsertDevice'
+import { useNavigate } from 'react-router-dom'
 
 const DevicesList = ({ role, loggedUser }) => {
+
+    const navigate = useNavigate()
+
+    useEffect(() => {
+        console.log("local storage: role=", localStorage.getItem("role"))
+        if (localStorage.getItem("role") !== role) {
+            navigate("/login")
+        }
+    }, [])
 
     const [devices, setDevices] = useState([])
     const [once, doOnce] = useState(false)
