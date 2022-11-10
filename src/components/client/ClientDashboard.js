@@ -9,7 +9,7 @@ const ClientDashboard = ({ loggedUser }) => {
 
     useEffect(() => {
         console.log("local storage: role=", localStorage.getItem("role"))
-        if (localStorage.getItem("role") === "admin") {
+        if (localStorage.getItem("role") !== "client") {
             navigate("/login")
         }
     }, [])
