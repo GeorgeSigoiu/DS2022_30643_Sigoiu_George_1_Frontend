@@ -7,9 +7,6 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
-body {
-  /* background-color: aquamarine; */
-}
 
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
@@ -28,4 +25,8 @@ code {
 
 .space-for-all-subdivs>div {
   margin-top: 10px
+}
+
+.hidden {
+  display: none;
 }
