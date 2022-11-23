@@ -11,6 +11,7 @@ export const LINK_GET_DEVICES_FROM_USER = baseUrl + "/get/devices-for-user/user-
 export const LINK_VERIFY_USERNAME_UNIQUE = baseUrl + "/verify/unique/username="
 export const LINK_VERIFY_ADDRESS_UNIQUE = baseUrl + "/verify/unique/device-address"
 export const LINK_GET_CONSUMPTION_FOR_DATE = baseUrl + "/get/consumption/for-date=DATE/device-id=DEVICEID"
+export const LINK_GET_DEVICES_WITH_CONSUMPTION_EXCEEDED = baseUrl + "/get/devices/consumption-exceeded-limit/username="
 
 export const LINK_ADD_USER = baseUrl + "/add/user"
 export const LINK_ADD_CREDENTIALS = baseUrl + "/add/credentials"
