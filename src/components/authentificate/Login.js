@@ -35,8 +35,10 @@ const Login = ({ setTokens, setUserType, setLoggedUser }) => {
         }
         const access_token = response.access_token
         const refresh_token = response.refresh_token
+        const username_1 = response.username
         localStorage.setItem("access_token", access_token)
         localStorage.setItem("refresh_token", refresh_token)
+        localStorage.setItem("username", username)
 
         const userUsername = response.username
         try {
@@ -52,7 +54,6 @@ const Login = ({ setTokens, setUserType, setLoggedUser }) => {
             const roles = decoded.roles
             const role = roles[0]
             localStorage.setItem("role", role)
-            console.log("added in local storage: role=", role)
             navigate(`/${role}`)
         } catch (exception) {
             setRequestStatus("danger")

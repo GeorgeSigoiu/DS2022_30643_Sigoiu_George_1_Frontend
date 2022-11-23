@@ -10,7 +10,9 @@ const Dashboard = ({ loggedUser, image }) => {
                         <button className="btn btn-secondary">
                             <img src={image} height="100" width="100" />
                         </button>
-                        <span className="name mt-3">{loggedUser.name}</span>
+                        <span className="name mt-3">
+                            {loggedUser.name}
+                        </span>
                     </div>
                 </div>
             </div>

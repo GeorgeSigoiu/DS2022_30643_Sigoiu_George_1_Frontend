@@ -36,7 +36,7 @@ const DevicesList = ({ role, loggedUser }) => {
                 link: LINK_GET_DEVICES,
                 payload: {}
             }
-        } else {
+        } else if (role === "client") {
             args = {
                 link: LINK_GET_DEVICES_FROM_USER + loggedUser.id,
                 payload: {}

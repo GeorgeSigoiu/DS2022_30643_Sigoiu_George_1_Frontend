@@ -10,6 +10,7 @@ import Settings from './components/common/Settings';
 import ClientDashboard from './components/client/ClientDashboard';
 
 function App() {
+
   const [userType, setUserType] = useState("")
   const [tokens, setTokens] = useState("")
   const [loggedUser, setLoggedUser] = useState("")
@@ -38,7 +39,7 @@ function App() {
   return (
     <div className="App">
       <Router>
-        <Navigation userType={userType} setUserType={setUserType} />
+        <Navigation setUserType={setUserType} />
         <Routes>
           <Route path="/admin" element={<AdminDashboard loggedUser={loggedUser} />} />
           <Route path="/admin/users" element={<UsersList />} />
