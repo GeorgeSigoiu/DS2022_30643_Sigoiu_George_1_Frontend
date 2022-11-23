@@ -1,5 +1,5 @@
 import React from 'react'
-import "./user_sticker.css"
+import "../../css/user_sticker.css"
 import avatarAdmin from "../../images/manager.png"
 import avatarClient from "../../images/client.png"
 import { useNavigate } from 'react-router-dom'

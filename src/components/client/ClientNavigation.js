@@ -1,7 +1,7 @@
 import React from 'react'
 import UserSticker from '../common/UserSticker'
 import { Link } from 'react-router-dom'
-import '../common/navigation.css'
+import '../../css/navigation.css'
 import NavbarElem_notificationBell from '../common/navigation/NavbarElem_notificationBell'
 import NavbarElem_logout from '../common/navigation/NavbarElem_logout'
 

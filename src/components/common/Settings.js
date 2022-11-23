@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import { requestHandler } from '../handlers'
 import { LINK_PUT_CREDENTIALS, putRequest } from '../requests'
 import Alert from './Alert'
-import './settings.css'
+import '../../css/settings.css'
 
 const Settings = ({ loggedUser, setLoggedUser }) => {
 

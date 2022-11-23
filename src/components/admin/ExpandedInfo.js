@@ -1,6 +1,6 @@
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
 import Alert from '../common/Alert'
-import "./expanded_info.css"
+import "../../css/expanded_info.css"
 import Modal from '../common/Modal'
 import { getRequest, LINK_PUT_USER, putRequest, LINK_GET_CREDENTIALS_ID, LINK_PUT_CREDENTIALS, LINK_ADD_DEVICE_TO_USER, LINK_GET_USER_BY_ID, LINK_UPDATE_DEVICES_USER, LINK_GET_DEVICES_WITHOUT_OWNER } from '../requests'
 import { requestHandler } from '../handlers'

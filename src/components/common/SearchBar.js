@@ -1,5 +1,5 @@
 import React from 'react'
-import "./search_bar.css"
+import "../../css/search_bar.css"
 const SearchBar = ({ filters }) => {
 
     async function myF() {

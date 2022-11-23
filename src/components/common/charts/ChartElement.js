@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import MyBarChart from './MyBarChart'
 import MyLineChart from './MyLineChart'
-import './chart_element.css'
+import '../../../css/chart_element.css'
 import MyDatePicker from './MyDatePicker';
 import { getRequest, LINK_GET_CONSUMPTION_FOR_DATE } from '../../requests';
 import { requestHandler } from '../../handlers'

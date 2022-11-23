@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import Modal from '../common/Modal'
-import './device_element.css'
+import '../../css/device_element.css'
 import Alert from '../common/Alert'
 import { deleteRequest, LINK_DELETE_DEVICE, LINK_DELETE_USER, LINK_PUT_DEVICE, putRequest } from '../requests'
 import { requestHandler } from '../handlers'

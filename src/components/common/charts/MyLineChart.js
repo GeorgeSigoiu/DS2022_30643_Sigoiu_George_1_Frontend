@@ -1,7 +1,6 @@
-import React, { useEffect, useState } from 'react'
+import React from 'react'
 import { LineChart, Line, CartesianGrid, XAxis, YAxis, Tooltip } from 'recharts'
 
-//https://recharts.org/en-US/guide/getting-started
 const MyLineChart = ({ data }) => {
 
     return (

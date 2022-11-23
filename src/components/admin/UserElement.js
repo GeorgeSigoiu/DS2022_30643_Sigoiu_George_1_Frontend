@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import Modal from '../common/Modal'
 import ExpandedInfo from './ExpandedInfo'
-import './user_element.css'
+import '../../css/user_element.css'
 import Alert from '../common/Alert'
 import { deleteRequest, LINK_DELETE_USER } from '../requests'
 import { requestHandler } from '../handlers'

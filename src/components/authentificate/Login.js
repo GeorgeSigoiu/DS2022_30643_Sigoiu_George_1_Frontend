@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import './login.css'
+import '../../css/login.css'
 import { useNavigate } from 'react-router-dom';
 import { getRequest, LINK_GET_USER_BY_USERNAME, login } from '../requests';
 import jwt_decode from "jwt-decode";

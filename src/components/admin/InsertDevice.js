@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import Alert from '../common/Alert'
 import Modal from '../common/Modal'
 import { requestHandler } from '../handlers'
-import { getRequest, LINK_ADD_DEVICE, LINK_VERIFY_ADDRESS_UNIQUE, postRequest } from '../requests'
+import { LINK_ADD_DEVICE, LINK_VERIFY_ADDRESS_UNIQUE, postRequest } from '../requests'
 
 const InsertDevice = ({ devices, setDevices }) => {
 
