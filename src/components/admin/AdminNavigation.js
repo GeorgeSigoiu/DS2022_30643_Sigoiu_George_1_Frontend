@@ -2,13 +2,11 @@ import React from 'react'
 import { Link } from 'react-router-dom'
 import UserSticker from '../common/UserSticker'
 import '../common/navigation.css'
+import NavbarElem_notificationBell from '../common/navigation/NavbarElem_notificationBell'
+import NavbarElem_logout from '../common/navigation/NavbarElem_logout'
 
 
 const AdminNavigation = ({ setUserType }) => {
-
-    function logoutAction() {
-        setUserType("")
-    }
 
     return (
         <nav>
@@ -34,11 +32,8 @@ const AdminNavigation = ({ setUserType }) => {
                                     <div type="button" className="btn btn-outline-primary">devices</div>
                                 </Link>
                             </li>
-                            <li id="logout-op">
-                                <Link to="/login">
-                                    <div type="button" className="btn btn-outline-primary" onClick={logoutAction}>log out</div>
-                                </Link>
-                            </li>
+                            <NavbarElem_notificationBell />
+                            <NavbarElem_logout setUserType={setUserType} />
                         </ul>
                     </div>
                 </div>

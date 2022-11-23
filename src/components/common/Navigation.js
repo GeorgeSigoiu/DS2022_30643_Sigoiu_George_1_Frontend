@@ -2,9 +2,9 @@ import React from 'react'
 import AdminNavigation from '../admin/AdminNavigation'
 import ClientNavigation from '../client/ClientNavigation'
 
-const Navigation = ({ userType, setUserType }) => {
+const Navigation = ({ setUserType }) => {
 
-
+    const userType = localStorage.getItem("role")
 
     return (
         <>

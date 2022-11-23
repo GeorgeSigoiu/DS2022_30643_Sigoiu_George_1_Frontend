@@ -1,6 +1,6 @@
 #common-nav {
-    padding-top: 1rem;
-    padding-bottom: 1rem;
+    // padding-top: 1rem;
+    // padding-bottom: 1rem;
     background-color: #333;
 
     .container {
@@ -16,11 +16,77 @@
                 display: flex;
                 margin: 0;
                 padding: 0;
+                align-items: center;
 
                 li {
                     margin-left: 2rem;
                     background-color: white;
                     border-radius: 7px;
+
+                }
+
+                #notification-bell {
+                    background-color: transparent;
+                    color: white;
+                    font-size: 25px;
+                    cursor: pointer;
+                    position: relative;
+                    padding-top: 1rem;
+                    padding-bottom: 1rem;
+
+                    &:hover .notifications {
+                        opacity: 100%;
+                        z-index: 30;
+                    }
+
+                    .notification-icon {
+                        position: relative;
+
+                        .badge {
+                            position: absolute;
+                            top: 0;
+                            right: -10px;
+                            z-index: 10;
+                            background-color: red;
+                            padding: 0.1rem 0.3rem 0.2rem 0.3rem;
+                            margin: 0;
+                            font-size: 15px;
+                        }
+
+                    }
+
+                    .notifications {
+                        transition: 0.5s opacity;
+                        opacity: 0%;
+                        cursor: default;
+                        position: absolute;
+                        color: black;
+                        width: 250px;
+                        background-color: whitesmoke;
+                        border: 2px solid black;
+                        border-radius: 10px;
+                        top: 100%;
+                        right: -300%;
+                        font-size: 15px;
+                        z-index: -30;
+                        // transform: translate(40px, 50px);
+
+                        .notification-elem {
+                            padding-top: 0.3rem;
+                            padding-left: 0.5rem;
+                            padding-right: 0.5rem;
+                            padding-bottom: 0.3rem;
+                            border-bottom: 2px solid black;
+
+                            &:last-child {
+                                border-bottom: none;
+                            }
+
+                            p {
+                                margin: 0;
+                            }
+                        }
+                    }
                 }
             }
         }
