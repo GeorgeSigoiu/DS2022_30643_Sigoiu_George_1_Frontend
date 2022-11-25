@@ -6,12 +6,11 @@ import DeviceElement from './DeviceElement'
 import InsertDevice from '../admin/InsertDevice'
 import { useNavigate } from 'react-router-dom'
 
-const DevicesList = ({ role, loggedUser }) => {
+const DevicesList = ({ role, loggedUser, newConsumption }) => {
 
     const navigate = useNavigate()
 
     useEffect(() => {
-        console.log("local storage: role=", localStorage.getItem("role"))
         if (localStorage.getItem("role") !== role) {
             navigate("/login")
         }
@@ -64,7 +63,7 @@ const DevicesList = ({ role, loggedUser }) => {
                 <div id="accordion-devices">
                     {
                         devices.map((el, index) => (
-                            <DeviceElement device={el} key={index} devices={devices} setDevices={setDevices} role={role} />
+                            <DeviceElement device={el} key={index} devices={devices} setDevices={setDevices} role={role} newConsumption={newConsumption} />
                         ))
                     }
                 </div>

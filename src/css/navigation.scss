@@ -61,7 +61,7 @@
                         cursor: default;
                         position: absolute;
                         color: black;
-                        width: 250px;
+                        width: 280px;
                         background-color: whitesmoke;
                         border: 2px solid black;
                         border-radius: 10px;
@@ -69,7 +69,26 @@
                         right: -300%;
                         font-size: 15px;
                         z-index: -30;
-                        // transform: translate(40px, 50px);
+                        max-height: 300px;
+                        overflow-y: auto;
+
+                        &::-webkit-scrollbar {
+                            width: 10px;
+                            border-radius: 10px;
+                        }
+
+                        &::-webkit-scrollbar-track {
+                            background: #f1f1f1;
+                        }
+
+                        &::-webkit-scrollbar-thumb {
+                            background: #888;
+                            border-radius: 10px;
+                        }
+
+                        &::-webkit-scrollbar-thumb:hover {
+                            background: #555;
+                        }
 
                         .notification-elem {
                             padding-top: 0.3rem;

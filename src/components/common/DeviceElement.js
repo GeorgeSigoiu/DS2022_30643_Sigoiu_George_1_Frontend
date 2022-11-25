@@ -6,7 +6,7 @@ import { deleteRequest, LINK_DELETE_DEVICE, LINK_DELETE_USER, LINK_PUT_DEVICE, p
 import { requestHandler } from '../handlers'
 import ChartElement from './charts/ChartElement'
 
-const DeviceElement = ({ device, devices, setDevices, role }) => {
+const DeviceElement = ({ device, devices, setDevices, role, newConsumption }) => {
 
     const [requestStatus, setRequestStatus] = useState("")
     const [executeMessage, setExecuteMessage] = useState("")
@@ -107,7 +107,7 @@ const DeviceElement = ({ device, devices, setDevices, role }) => {
                     <Modal type="alert"
                         title={`Chart: energy consumption`}
                         content={
-                            <ChartElement device={device} />
+                            <ChartElement device={device} newConsumption={newConsumption} />
                         }
                         modalId={`chart-show-${device.id}`}
                         btnMessage={"Ok"}

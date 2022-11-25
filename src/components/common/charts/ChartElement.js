@@ -6,7 +6,7 @@ import MyDatePicker from './MyDatePicker';
 import { getRequest, LINK_GET_CONSUMPTION_FOR_DATE } from '../../requests';
 import { requestHandler } from '../../handlers'
 
-const ChartElement = ({ device }) => {
+const ChartElement = ({ device, newConsumption }) => {
 
     const [selectedDate, setSelectedDate] = useState(new Date().toISOString())
     const [data, setData] = useState([])
@@ -30,11 +30,38 @@ const ChartElement = ({ device }) => {
     useEffect(() => {
     }, [data])
 
+    //{"date":"2022-11-23","device_id":11,"hour":9,"value":14}'}
+    useEffect(() => {
+        if (Object.keys(newConsumption).length === 0 && newConsumption.constructor === Object) return
+        try {
+            const info = JSON.parse(newConsumption)
+            const deviceId = info["device_id"]
+            if (device.id !== deviceId) return
+            const date = info["date"]
+            const hour = info.hour
+            const value = info.value
+
+            let lastData = data
+            const selectedDateString = String(selectedDate)
+            const isTheDate = selectedDateString.startsWith(date)
+            if (isTheDate) {
+                lastData[hour] = {
+                    time: hour + ":00",
+                    value: value
+                }
+                setData([...lastData])
+            }
+        } catch (e) {
+            console.log(e)
+        }
+    }, [newConsumption])
+
     async function getConsumption(date) {
         const response = await requestHandler(getRequest, {
             link: LINK_GET_CONSUMPTION_FOR_DATE.replace("DATE", date.toString()).replace("DEVICEID", device.id),
             payload: {}
         })
+        console.log(response)
         constructData(response)
     }
 
