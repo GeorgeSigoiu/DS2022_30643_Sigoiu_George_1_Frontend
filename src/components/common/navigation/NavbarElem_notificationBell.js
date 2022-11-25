@@ -3,8 +3,7 @@ import { requestHandler } from '../../handlers';
 import { getRequest, LINK_GET_DEVICES_WITH_CONSUMPTION_EXCEEDED } from '../../requests';
 import WebSocket from '../WebSocket'
 
-const NavbarElem_notificationBell = () => {
-    const [message, setMessage] = useState({});
+const NavbarElem_notificationBell = ({ message }) => {
     const [notifications, setNotifications] = useState([])
 
     async function getDevicesWithConsumptionExceeded() {
@@ -17,47 +16,46 @@ const NavbarElem_notificationBell = () => {
     }
 
     useEffect(() => {
-        // get the devices that passed the limit
-        // sub forma: limita depasita {value}, adresa
         getDevicesWithConsumptionExceeded()
     }, [])
 
 
     useEffect(() => {
-        console.log("Got the new message: ", message)
-        let newMessage = true
-        for (let i = 0; i < notifications.length; i++) {
-            if (notifications[i].address === message.address) {
-                newMessage = false
-            }
-        }
-        if (newMessage) {
+        if (!notifications.includes(message)) {
             setNotifications([...notifications, message])
         }
     }, [message])
+
+    function deleteNotification(index) {
+        let newNotif = notifications
+        newNotif.splice(index, 1)
+        setNotifications([...newNotif])
+    }
 
     return (
         <>
             <li id="notification-bell" /*onMouseEnter={e => onMouseEnter(e)}*/>
                 <div className="notification-icon">
-                    <i class="fa-solid fa-bell"></i>
+                    <i className="fa-solid fa-bell"></i>
                     <span id="notification-badge" className='badge'>{notifications.length > 0 ? notifications.length : ""}</span>
                 </div>
                 <div className="notifications">
                     {
                         notifications.map((el, index) => (
-                            <div className="notification-elem" key={index}>
+                            <div className="notification-elem d-flex" key={index}>
                                 <p>
-                                    {el.address}
+                                    Address: {el.address}
                                     <br />
-                                    Exceeded max consumption: {el.max_consumption}
+                                    date: {el.date}, {el.time}:00
                                 </p>
+                                <div style={{ cursor: "pointer" }} onClick={() => deleteNotification(index)}>
+                                    X
+                                </div>
                             </div>
                         ))
                     }
                 </div>
             </li>
-            <WebSocket message={message} setMessage={setMessage} />
         </>
     )
 }

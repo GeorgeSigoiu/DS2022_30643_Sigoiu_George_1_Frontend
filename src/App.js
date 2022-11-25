@@ -8,17 +8,22 @@ import jwt_decode from "jwt-decode";
 import DevicesList from './components/common/DevicesList';
 import Settings from './components/common/Settings';
 import ClientDashboard from './components/client/ClientDashboard';
+import WebSocket from './components/common/WebSocket';
 
 function App() {
 
   const [userType, setUserType] = useState("")
   const [tokens, setTokens] = useState("")
   const [loggedUser, setLoggedUser] = useState("")
+  const [message, setMessage] = useState({});
+  const [newConsumption, setNewConsumption] = useState({})
+  const [username, setUsername] = useState("")
 
   useEffect(() => {
   }, [userType])
 
   useEffect(() => {
+    setUsername()
   }, [loggedUser])
 
   useEffect(() => {
@@ -33,13 +38,16 @@ function App() {
     } else {
       localStorage.setItem("access_token", "")
       localStorage.setItem("refresh_token", "")
+      localStorage.setItem("username", "")
+      localStorage.setItem("role", "")
+      setUsername("")
     }
   }, [tokens])
 
   return (
     <div className="App">
       <Router>
-        <Navigation setUserType={setUserType} />
+        <Navigation setUserType={setUserType} message={message} />
         <Routes>
           <Route path="/admin" element={<AdminDashboard loggedUser={loggedUser} />} />
           <Route path="/admin/users" element={<UsersList />} />
@@ -48,11 +56,12 @@ function App() {
           <Route path="/user/settings" element={<Settings loggedUser={loggedUser} setLoggedUser={setLoggedUser} />} />
 
           <Route path="/client" element={<ClientDashboard loggedUser={loggedUser} />} />
-          <Route path="/client/devices" element={<DevicesList role="client" loggedUser={loggedUser} />} />
+          <Route path="/client/devices" element={<DevicesList role="client" loggedUser={loggedUser} newConsumption={newConsumption} />} />
 
-          <Route path="/login" element={<Login setTokens={setTokens} setUserType={setUserType} setLoggedUser={setLoggedUser} />} />
-          <Route path="/" element={<Login setTokens={setTokens} setUserType={setUserType} setLoggedUser={setLoggedUser} />} />
+          <Route path="/login" element={<Login setTokens={setTokens} setUserType={setUserType} setLoggedUser={setLoggedUser} setUsername={setUsername} />} />
+          <Route path="/" element={<Login setTokens={setTokens} setUserType={setUserType} setLoggedUser={setLoggedUser} setUsername={setUsername} />} />
         </Routes>
+        <WebSocket setMessage={setMessage} setNewConsumption={setNewConsumption} username={username} />
       </Router>
     </div>
   );

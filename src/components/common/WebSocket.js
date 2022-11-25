@@ -1,29 +1,46 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import SockJsClient from 'react-stomp'
 
 const SOCKET_URL = 'http://localhost:7900/ws-message';
 
-const WebSocket = ({ setMessage }) => {
+const WebSocket = ({ setMessage, setNewConsumption, username }) => {
 
     let onConnected = () => {
         console.log("Connected!!")
     }
 
     let onMessageReceived = (msg) => {
-        const content = msg.message
-        const obj = JSON.parse(content)
-        setMessage(obj);
+        console.log("Got the message: ", msg)
+        const content1 = msg.message_exceeded_consumption
+        const content2 = msg.device_consumption
+        setNewConsumption(content2)
+        const obj = JSON.parse(content1)
+        if (JSON.stringify(obj) !== "{}") {
+            console.log("add obj: ", obj)
+            setMessage(obj);
+        }
     }
+
+    useEffect(() => {
+        console.log("username", username)
+        console.log("username ls", localStorage.getItem("username"))
+    }, [username])
 
     return (
         <div>
-            <SockJsClient
-                url={SOCKET_URL}
-                topics={['/topic/message']}
-                onConnect={onConnected}
-                onDisconnect={console.log("Disconnected!")}
-                onMessage={msg => onMessageReceived(msg)}
-            />
+            {
+                username !== "" &&
+                (
+                    <SockJsClient
+                        url={SOCKET_URL}
+                        topics={['/topic/message', "/user/" + localStorage.getItem("username") + "/private"]}
+                        onConnect={onConnected}
+                        onDisconnect={console.log("Disconnected!")}
+                        onMessage={msg => onMessageReceived(msg)}
+                    />
+                )
+            }
+
         </div>
     );
 }

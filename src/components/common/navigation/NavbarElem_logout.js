@@ -6,6 +6,7 @@ const NavbarElem_logout = ({ setUserType }) => {
     function logoutAction() {
         setUserType("")
         localStorage.setItem("role", "")
+        localStorage.setItem("username", "")
     }
 
     return (

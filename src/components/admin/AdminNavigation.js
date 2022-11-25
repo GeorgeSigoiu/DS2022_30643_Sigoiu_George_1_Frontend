@@ -6,7 +6,7 @@ import NavbarElem_notificationBell from '../common/navigation/NavbarElem_notific
 import NavbarElem_logout from '../common/navigation/NavbarElem_logout'
 
 
-const AdminNavigation = ({ setUserType }) => {
+const AdminNavigation = ({ setUserType, message }) => {
 
     return (
         <nav>
@@ -32,7 +32,7 @@ const AdminNavigation = ({ setUserType }) => {
                                     <div type="button" className="btn btn-outline-primary">devices</div>
                                 </Link>
                             </li>
-                            <NavbarElem_notificationBell />
+                            <NavbarElem_notificationBell message={message} />
                             <NavbarElem_logout setUserType={setUserType} />
                         </ul>
                     </div>

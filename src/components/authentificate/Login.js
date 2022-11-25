@@ -6,7 +6,7 @@ import jwt_decode from "jwt-decode";
 import { requestHandler } from '../handlers';
 import Alert from '../common/Alert';
 
-const Login = ({ setTokens, setUserType, setLoggedUser }) => {
+const Login = ({ setTokens, setUserType, setLoggedUser, setUsername }) => {
 
     const navigate = useNavigate();
     setUserType("")
@@ -39,7 +39,8 @@ const Login = ({ setTokens, setUserType, setLoggedUser }) => {
         localStorage.setItem("access_token", access_token)
         localStorage.setItem("refresh_token", refresh_token)
         localStorage.setItem("username", username)
-
+        console.log(username)
+        setUsername(username)
         const userUsername = response.username
         try {
             const user = await requestHandler(getRequest, {
