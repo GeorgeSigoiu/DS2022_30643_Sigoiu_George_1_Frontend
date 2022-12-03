@@ -33,3 +33,8 @@ stages:
         versionSource: 'spec'
         versionSpec: '6.x'
         checkLatest: true
+    - task: Npm@1
+      inputs:
+        command: 'publish'
+        publishRegistry: 'useFeed'
+        publishFeed: '640b394d-668d-4eb2-bb81-9d56e69c6a9b'
