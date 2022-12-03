@@ -3,6 +3,6 @@ version: '3'
 services:
 
   react:
-    image: frontend_energy
+    image: containerregistrygeorgesigoiu30643.azurecr.io/frontend_energy
     ports:
       - '3000:3000'
