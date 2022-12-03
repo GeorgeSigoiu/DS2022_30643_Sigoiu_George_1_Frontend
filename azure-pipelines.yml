@@ -28,10 +28,6 @@ stages:
     pool:
       name: local
     steps:
-    - task: NodeTool@0
-      inputs:
-        versionSource: 'fromFile'
-        checkLatest: true
     - task: Npm@1
       inputs:
         command: 'ci'
