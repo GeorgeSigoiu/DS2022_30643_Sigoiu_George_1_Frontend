@@ -28,8 +28,12 @@ stages:
     pool:
       name: local
     steps:
-    - task: Npm@1
+    - task: NodeTool@0
       inputs:
-        command: 'ci'
-        customRegistry: 'useFeed'
-        customFeed: '640b394d-668d-4eb2-bb81-9d56e69c6a9b'
+        versionSpec: '10.x'
+      displayName: 'Install Node.js'
+
+    - script: |
+        npm install
+        npm run build
+      displayName: 'npm install and build'
