@@ -32,7 +32,11 @@ const ChartElement = ({ device, newConsumption }) => {
 
     //{"date":"2022-11-23","device_id":11,"hour":9,"value":14}'}
     useEffect(() => {
-        if (Object.keys(newConsumption).length === 0 && newConsumption.constructor === Object) return
+        try {
+            if (Object.keys(newConsumption).length === 0 && newConsumption.constructor === Object) return
+        } catch (e) {
+            return
+        }
         try {
             const info = JSON.parse(newConsumption)
             const deviceId = info["device_id"]
