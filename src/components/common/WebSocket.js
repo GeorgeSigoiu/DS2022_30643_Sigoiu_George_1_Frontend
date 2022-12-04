@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import SockJsClient from 'react-stomp'
 
-const SOCKET_URL = 'http://20.113.98.38:7900/ws-message';
+const SOCKET_URL = 'http://20.52.196.84:7900/ws-message';
+// const SOCKET_URL = 'http://localhost:7901/ws-message';
 
 const WebSocket = ({ setMessage, setNewConsumption, username }) => {
 
