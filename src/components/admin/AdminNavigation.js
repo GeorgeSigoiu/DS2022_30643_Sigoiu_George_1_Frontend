@@ -23,6 +23,11 @@ const AdminNavigation = ({ setUserType, message }) => {
                                 </Link>
                             </li>
                             <li id="users-op">
+                                <Link to="/admin/messages">
+                                    <div type="button" className="btn btn-outline-primary">messages</div>
+                                </Link>
+                            </li>
+                            <li id="users-op">
                                 <Link to="/admin/users">
                                     <div type="button" className="btn btn-outline-primary">users</div>
                                 </Link>
