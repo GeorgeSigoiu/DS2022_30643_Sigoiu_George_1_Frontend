@@ -30,6 +30,21 @@ export const LINK_UPDATE_DEVICES_USER = baseUrl + "/update/devices/to-user="
 export const LINK_LOGIN = baseUrl + "/login"
 const LINK_REFRESH_TOKEN = baseUrl + "/token/refresh"
 
+export const LINK_SEND_MESSAGE_TO_CLIENT = baseUrl + "/ws/send-message/to-client"
+export const LINK_SEND_MESSAGE_TO_ADMIN = baseUrl + "/ws/send-message/to-admin"
+export const LINK_WS_CONNECTED = baseUrl + "/ws/connected"
+export const LINK_WS_DISCONNECTED = baseUrl + "/ws/disconnected"
+
+export const LINK_GET_TICKET_MESSAGES = baseUrl + "/ws/get-messages/client/"
+export const LINK_CLOSE_TICKET = baseUrl + "/ws/close-ticket"
+
+export const LINK_GET_TICKETS = baseUrl + "/ws/get-tickets/admin/"
+export const LINK_ASSIGN_ADMIN_TO_TICKET = baseUrl + "/ws/assign-ticket-to-admin"
+export const LINK_GET_TICKET = baseUrl + "/ws/get-ticket/"
+export const LINK_GET_TICKETS_NUMBER_UNASSIGNED = baseUrl + "/ws/get-tickets-number/unassigned"
+
+export const LINK_READ_MESSAGES = baseUrl + "/ws/read-messages"
+export const LINK_SET_TYPING = baseUrl + "/ws/typing"
 
 export async function getRequest(link, access_token, payload) {
 
@@ -146,11 +161,6 @@ async function insertCredentials(credentials, access_token) {
             return response.data
         })
 }
-
-async function deleteCredentials() {
-
-}
-
 
 export async function refreshToken(refresh_token) {
     const response = await axios.get(LINK_REFRESH_TOKEN, {
