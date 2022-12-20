@@ -1,0 +1,45 @@
+#ticket-messenger {
+  position: fixed;
+  right: 4rem;
+  bottom: 1rem;
+  background-color: white;
+  border-radius: 10px;
+  padding: 0.5rem;
+  transition: all 0.5s;
+  width: auto;
+  height: auto;
+}
+#ticket-messenger hr {
+  opacity: 0;
+  transition: all 0.3s;
+}
+#ticket-messenger #ticket-header {
+  position: relative;
+  display: flex;
+}
+#ticket-messenger #ticket-header i {
+  cursor: pointer;
+  color: rgb(0, 132, 255);
+  font-size: 45px;
+  transition: all 0.3s;
+  display: inline;
+}
+#ticket-messenger #ticket-header #room-name {
+  display: inline;
+  margin-left: 1rem;
+  width: 0;
+  height: 0;
+  overflow: hidden;
+  transition: all 0.3s;
+}
+#ticket-messenger #ticket-body {
+  transition: all 0.5s;
+  height: 0;
+  width: 0;
+  position: relative;
+  overflow: hidden;
+}
+#ticket-messenger #ticket-body #ticket-messages {
+  height: 100%;
+  overflow-y: auto;
+}/*# sourceMappingURL=ticket_messenger.css.map */

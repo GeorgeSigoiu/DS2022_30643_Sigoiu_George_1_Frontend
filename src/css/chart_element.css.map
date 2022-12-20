@@ -1,9 +1,1 @@
-{
-    "version": 3,
-    "mappings": "AAAA,AAGY,gBAHI,CACZ,EAAE,CACE,EAAE,CACE,CAAC,CAAC;EACE,eAAe,EAAE,IAAI;EACrB,KAAK,EAAE,IAAI;EACX,UAAU,EAAE,QAAQ;EACpB,MAAM,EAAE,OAAO;CAKlB;;AAZb,AASgB,gBATA,CACZ,EAAE,CACE,EAAE,CACE,CAAC,AAMI,MAAM,CAAC;EACJ,KAAK,EAAE,IAAI;CACd",
-    "sources": [
-        "chart_element.scss"
-    ],
-    "names": [],
-    "file": "chart_element.css"
-}
+{"version":3,"sources":["chart_element.scss","chart_element.css"],"names":[],"mappings":"AAGY;EACI,qBAAA;EACA,WAAA;EACA,oBAAA;EACA,eAAA;ACFhB;ADIgB;EACI,WAAA;ACFpB","file":"chart_element.css"}

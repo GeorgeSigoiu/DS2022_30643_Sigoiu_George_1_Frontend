@@ -30,3 +30,7 @@ code {
 .hidden {
   display: none;
 }
+
+.disabled {
+  pointer-events: none;
+}

@@ -2,41 +2,33 @@
   width: 350px;
   background-color: #efefef;
   border: none;
-  -webkit-transition: all 0.5s;
   transition: all 0.5s;
 }
-
 #client-dashboard .btn {
   height: 140px;
   width: 140px;
   border-radius: 50%;
 }
-
 #client-dashboard .name {
   font-size: 22px;
   font-weight: bold;
 }
-
 #client-dashboard .idd {
   font-size: 14px;
   font-weight: 600;
 }
-
 #client-dashboard .idd1 {
   font-size: 12px;
 }
-
 #client-dashboard .number {
   font-size: 22px;
   font-weight: bold;
 }
-
 #client-dashboard .follow {
   font-size: 12px;
   font-weight: 500;
   color: #444444;
 }
-
 #client-dashboard .btn1 {
   height: 40px;
   width: 150px;
@@ -45,28 +37,22 @@
   color: #aeaeae;
   font-size: 15px;
 }
-
 #client-dashboard .text span {
   font-size: 13px;
   color: #545454;
   font-weight: 500;
 }
-
 #client-dashboard .icons i {
   font-size: 19px;
 }
-
 #client-dashboard hr .new1 {
   border: 1px solid;
 }
-
 #client-dashboard .join {
   font-size: 14px;
   color: #a0a0a0;
   font-weight: bold;
 }
-
 #client-dashboard .date {
   background-color: #ccc;
-}
-/*# sourceMappingURL=dashboard.css.map */
+}/*# sourceMappingURL=dashboard.css.map */

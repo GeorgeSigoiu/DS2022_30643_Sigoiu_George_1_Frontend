@@ -1,39 +1,26 @@
 #common-nav {
   background-color: #333;
 }
-
 #common-nav .container {
-  display: -webkit-box;
-  display: -ms-flexbox;
   display: flex;
-  -webkit-box-pack: justify;
-      -ms-flex-pack: justify;
-          justify-content: space-between;
+  justify-content: space-between;
 }
-
 #common-nav .container .operations {
   margin-top: auto;
   margin-bottom: auto;
 }
-
 #common-nav .container .operations ul {
   list-style-type: none;
-  display: -webkit-box;
-  display: -ms-flexbox;
   display: flex;
   margin: 0;
   padding: 0;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
+  align-items: center;
 }
-
 #common-nav .container .operations ul li {
   margin-left: 2rem;
   background-color: white;
   border-radius: 7px;
 }
-
 #common-nav .container .operations ul #notification-bell {
   background-color: transparent;
   color: white;
@@ -43,16 +30,13 @@
   padding-top: 1rem;
   padding-bottom: 1rem;
 }
-
 #common-nav .container .operations ul #notification-bell:hover .notifications {
   opacity: 100%;
   z-index: 30;
 }
-
 #common-nav .container .operations ul #notification-bell .notification-icon {
   position: relative;
 }
-
 #common-nav .container .operations ul #notification-bell .notification-icon .badge {
   position: absolute;
   top: 0;
@@ -63,9 +47,7 @@
   margin: 0;
   font-size: 15px;
 }
-
 #common-nav .container .operations ul #notification-bell .notifications {
-  -webkit-transition: 0.5s opacity;
   transition: 0.5s opacity;
   opacity: 0%;
   cursor: default;
@@ -82,25 +64,20 @@
   max-height: 300px;
   overflow-y: auto;
 }
-
 #common-nav .container .operations ul #notification-bell .notifications::-webkit-scrollbar {
   width: 10px;
   border-radius: 10px;
 }
-
 #common-nav .container .operations ul #notification-bell .notifications::-webkit-scrollbar-track {
   background: #f1f1f1;
 }
-
 #common-nav .container .operations ul #notification-bell .notifications::-webkit-scrollbar-thumb {
   background: #888;
   border-radius: 10px;
 }
-
 #common-nav .container .operations ul #notification-bell .notifications::-webkit-scrollbar-thumb:hover {
   background: #555;
 }
-
 #common-nav .container .operations ul #notification-bell .notifications .notification-elem {
   padding-top: 0.3rem;
   padding-left: 0.5rem;
@@ -108,12 +85,9 @@
   padding-bottom: 0.3rem;
   border-bottom: 2px solid black;
 }
-
 #common-nav .container .operations ul #notification-bell .notifications .notification-elem:last-child {
   border-bottom: none;
 }
-
 #common-nav .container .operations ul #notification-bell .notifications .notification-elem p {
   margin: 0;
-}
-/*# sourceMappingURL=navigation.css.map */
+}/*# sourceMappingURL=navigation.css.map */

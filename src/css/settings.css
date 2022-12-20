@@ -3,7 +3,6 @@
   text-decoration: underline;
   margin-left: 0.5rem;
 }
-
 #settings .content {
   background-color: whitesmoke;
   width: -webkit-fit-content;
@@ -15,18 +14,12 @@
   border-radius: 10px;
   margin-bottom: 1rem;
 }
-
 #settings .content .input-field {
-  display: -webkit-box;
-  display: -ms-flexbox;
   display: flex;
   margin-bottom: 0.5rem;
   width: 420px;
-  -webkit-box-pack: justify;
-      -ms-flex-pack: justify;
-          justify-content: space-between;
+  justify-content: space-between;
 }
-
 #settings .content .input-field div input {
   border-style: solid;
   border-radius: 7px;
@@ -35,16 +28,13 @@
   padding-right: 10px;
   width: 170px;
 }
-
 #settings .content .input-field div i {
   margin-left: 10px;
-  color: #becd32;
+  color: rgb(190, 205, 50);
   cursor: pointer;
   opacity: 0;
   pointer-events: none;
 }
-
 #settings .btn-password {
   margin: 0;
-}
-/*# sourceMappingURL=settings.css.map */
+}/*# sourceMappingURL=settings.css.map */

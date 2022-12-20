@@ -1,60 +1,44 @@
 @import url("https://fonts.googleapis.com/css?family=Raleway:400,700");
 * {
-  -webkit-box-sizing: border-box;
-          box-sizing: border-box;
+  box-sizing: border-box;
   margin: 0;
   padding: 0;
   font-family: Raleway, sans-serif;
 }
 
 body {
-  background: -webkit-gradient(linear, left top, right top, from(#C7C5F4), to(#776BCC));
   background: linear-gradient(90deg, #C7C5F4, #776BCC);
 }
 
 #login-page {
   position: relative;
 }
-
 #login-page .alert {
   margin-top: 2rem;
   position: absolute;
   top: 0%;
   left: 50%;
-  -webkit-transform: translateX(-50%);
-          transform: translateX(-50%);
+  transform: translateX(-50%);
   z-index: 10;
 }
-
 #login-page .container {
-  display: -webkit-box;
-  display: -ms-flexbox;
   display: flex;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
-  -webkit-box-pack: center;
-      -ms-flex-pack: center;
-          justify-content: center;
+  align-items: center;
+  justify-content: center;
   height: 100vh;
 }
-
 #login-page .screen {
-  background: -webkit-gradient(linear, left top, right top, from(#5D54A4), to(#7C78B8));
   background: linear-gradient(90deg, #5D54A4, #7C78B8);
   position: relative;
   height: 600px;
   width: 360px;
-  -webkit-box-shadow: 0px 0px 24px #5C5696;
-          box-shadow: 0px 0px 24px #5C5696;
+  box-shadow: 0px 0px 24px #5C5696;
 }
-
 #login-page .screen__content {
   z-index: 1;
   position: relative;
   height: 100%;
 }
-
 #login-page .screen__background {
   position: absolute;
   top: 0;
@@ -65,13 +49,10 @@ body {
   -webkit-clip-path: inset(0 0 0 0);
   clip-path: inset(0 0 0 0);
 }
-
 #login-page .screen__background__shape {
-  -webkit-transform: rotate(45deg);
-          transform: rotate(45deg);
+  transform: rotate(45deg);
   position: absolute;
 }
-
 #login-page .screen__background__shape1 {
   height: 520px;
   width: 520px;
@@ -80,7 +61,6 @@ body {
   right: 120px;
   border-radius: 0 72px 0 0;
 }
-
 #login-page .screen__background__shape2 {
   height: 220px;
   width: 220px;
@@ -89,17 +69,14 @@ body {
   right: 0;
   border-radius: 32px;
 }
-
 #login-page .screen__background__shape3 {
   height: 540px;
   width: 190px;
-  background: -webkit-gradient(linear, right top, left top, from(#5D54A4), to(#6A679E));
   background: linear-gradient(270deg, #5D54A4, #6A679E);
   top: -24px;
   right: 0;
   border-radius: 32px;
 }
-
 #login-page .screen__background__shape4 {
   height: 400px;
   width: 200px;
@@ -108,24 +85,20 @@ body {
   right: 50px;
   border-radius: 60px;
 }
-
 #login-page .login {
   width: 320px;
   padding: 30px;
   padding-top: 156px;
 }
-
 #login-page .login__field {
   padding: 20px 0px;
   position: relative;
 }
-
 #login-page .login__icon {
   position: absolute;
   top: 30px;
   color: #7875B5;
 }
-
 #login-page .login__input {
   border: none;
   border-bottom: 2px solid #D1D1D4;
@@ -134,17 +107,14 @@ body {
   padding-left: 24px;
   font-weight: 700;
   width: 75%;
-  -webkit-transition: .2s;
-  transition: .2s;
+  transition: 0.2s;
 }
-
 #login-page .login__input:active,
 #login-page .login__input:focus,
 #login-page .login__input:hover {
   outline: none;
   border-bottom-color: #6A679E;
 }
-
 #login-page .login__submit {
   background: #fff;
   font-size: 14px;
@@ -154,34 +124,25 @@ body {
   border: 1px solid #D4D3E8;
   text-transform: uppercase;
   font-weight: 700;
-  display: -webkit-box;
-  display: -ms-flexbox;
   display: flex;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
+  align-items: center;
   width: 100%;
   color: #4C489D;
-  -webkit-box-shadow: 0px 2px 2px #5C5696;
-          box-shadow: 0px 2px 2px #5C5696;
+  box-shadow: 0px 2px 2px #5C5696;
   cursor: pointer;
-  -webkit-transition: .2s;
-  transition: .2s;
+  transition: 0.2s;
 }
-
 #login-page .login__submit:active,
 #login-page .login__submit:focus,
 #login-page .login__submit:hover {
   border-color: #6A679E;
   outline: none;
 }
-
 #login-page .button__icon {
   font-size: 24px;
   margin-left: auto;
   color: #7875B5;
 }
-
 #login-page .social-login {
   position: absolute;
   height: 140px;
@@ -191,28 +152,17 @@ body {
   right: 0px;
   color: #fff;
 }
-
 #login-page .social-icons {
-  display: -webkit-box;
-  display: -ms-flexbox;
   display: flex;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
-  -webkit-box-pack: center;
-      -ms-flex-pack: center;
-          justify-content: center;
+  align-items: center;
+  justify-content: center;
 }
-
 #login-page .social-login__icon {
   padding: 20px 10px;
   color: #fff;
   text-decoration: none;
   text-shadow: 0px 0px 8px #7875B5;
 }
-
 #login-page .social-login__icon:hover {
-  -webkit-transform: scale(1.5);
-          transform: scale(1.5);
-}
-/*# sourceMappingURL=login.css.map */
+  transform: scale(1.5);
+}/*# sourceMappingURL=login.css.map */

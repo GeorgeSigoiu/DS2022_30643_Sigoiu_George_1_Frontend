@@ -2,34 +2,24 @@
   position: relative;
   margin-top: 1rem;
 }
-
 .user-element .card .card-content {
   padding-left: 1rem;
   padding-right: 1rem;
   padding-top: 0.5rem;
   padding-bottom: 0.5rem;
-  display: -webkit-box;
-  display: -ms-flexbox;
   display: flex;
-  -webkit-box-pack: justify;
-      -ms-flex-pack: justify;
-          justify-content: space-between;
+  justify-content: space-between;
 }
-
 .user-element .card .card-content .name-field {
   z-index: 5;
   margin-top: auto;
   margin-bottom: auto;
   font-size: 25px;
 }
-
 .user-element .card .card-content .operation-field {
-  display: -webkit-box;
-  display: -ms-flexbox;
   display: flex;
   z-index: 10;
 }
-
 .user-element .card .card-content .operation-field .icon {
   margin-top: auto;
   margin-bottom: auto;
@@ -37,13 +27,10 @@
   border-radius: 10px;
   margin-left: 5px;
 }
-
 .user-element .card .expanded-info {
   padding-left: 1rem;
   overflow: hidden;
 }
-
 .user-element .card .expanded-info .info-input {
   margin-top: 0.6rem;
-}
-/*# sourceMappingURL=user_element.css.map */
+}/*# sourceMappingURL=user_element.css.map */
