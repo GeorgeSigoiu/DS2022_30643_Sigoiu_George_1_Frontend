@@ -65,7 +65,6 @@ const ChartElement = ({ device, newConsumption }) => {
             link: LINK_GET_CONSUMPTION_FOR_DATE.replace("DATE", date.toString()).replace("DEVICEID", device.id),
             payload: {}
         })
-        console.log(response)
         constructData(response)
     }
 
@@ -98,14 +97,14 @@ const ChartElement = ({ device, newConsumption }) => {
             <div style={{ display: "flex", justifyContent: "space-between" }}>
                 <ul>
                     <li onClick={e => click(e)}>
-                        <a data-toggle="tab" id={`ref-line-chart-${device.id}`}>
+                        <span data-toggle="tab" id={`ref-line-chart-${device.id}`} style={{ cursor: "pointer" }}>
                             Line chart
-                        </a>
+                        </span>
                     </li>
                     <li onClick={e => click(e)}>
-                        <a data-toggle="tab" id={`ref-bar-chart-${device.id}`}>
+                        <span data-toggle="tab" id={`ref-bar-chart-${device.id}`} style={{ cursor: "pointer" }}>
                             Bar chart
-                        </a>
+                        </span>
                     </li>
                 </ul>
                 <div style={{ width: "fit-content" }}>

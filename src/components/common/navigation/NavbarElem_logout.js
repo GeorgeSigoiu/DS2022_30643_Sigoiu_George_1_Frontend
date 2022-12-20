@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom'
 
 const NavbarElem_logout = ({ setUserType }) => {
 
-    function logoutAction() {
+    async function logoutAction() {
         setUserType("")
         localStorage.setItem("role", "")
         localStorage.setItem("username", "")

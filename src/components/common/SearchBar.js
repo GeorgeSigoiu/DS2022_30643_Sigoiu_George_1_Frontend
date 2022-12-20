@@ -1,9 +1,9 @@
 import React from 'react'
 import "../../css/search_bar.css"
+
 const SearchBar = ({ filters }) => {
 
     async function myF() {
-
     }
 
     return (
