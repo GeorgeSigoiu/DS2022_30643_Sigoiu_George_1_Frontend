@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import '../../css/login.css'
 import { useNavigate } from 'react-router-dom';
-import { getRequest, LINK_GET_USER_BY_USERNAME, login } from '../requests';
+import { getRequest, LINK_GET_USER_BY_USERNAME, LINK_WS_DISCONNECTED, login, postRequest } from '../requests';
 import jwt_decode from "jwt-decode";
 import { requestHandler } from '../handlers';
 import Alert from '../common/Alert';
@@ -9,6 +9,15 @@ import Alert from '../common/Alert';
 const Login = ({ setTokens, setUserType, setLoggedUser, setUsername }) => {
 
     const navigate = useNavigate();
+
+    const username = localStorage.getItem("username")
+    if (username !== undefined && username != null && username !== "") {
+        console.log("disconnect user: ", username)
+        requestHandler(postRequest, {
+            link: LINK_WS_DISCONNECTED,
+            payload: username
+        })
+    }
     setUserType("")
     setTokens("")
     setLoggedUser("")
@@ -35,11 +44,10 @@ const Login = ({ setTokens, setUserType, setLoggedUser, setUsername }) => {
         }
         const access_token = response.access_token
         const refresh_token = response.refresh_token
-        const username_1 = response.username
         localStorage.setItem("access_token", access_token)
         localStorage.setItem("refresh_token", refresh_token)
         localStorage.setItem("username", username)
-        console.log(username)
+        // console.log(username)
         setUsername(username)
         const userUsername = response.username
         try {
