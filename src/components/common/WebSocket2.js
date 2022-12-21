@@ -4,8 +4,8 @@ import TicketMessenger from '../client/TicketMessenger';
 import { requestHandler } from '../handlers';
 import { LINK_WS_CONNECTED, postRequest } from '../requests';
 
-// const SOCKET_URL = 'http://20.113.96.159:7900/ws-message';
-const SOCKET_URL = 'http://localhost:7901/ws-message';
+const SOCKET_URL = 'http://20.170.66.16:7900/ws-message';
+// const SOCKET_URL = 'http://localhost:7901/ws-message';
 
 /**
  * Used for receiving private messages from admins or from clients 
