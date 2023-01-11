@@ -1,6 +1,6 @@
 import axios from "axios"
 // const baseUrl = "http://localhost:7901"
-const baseUrl = "http://20.170.66.16:7900"
+const baseUrl = "http://20.52.204.186:7900"
 export const LINK_GET_USERS = baseUrl + "/get/users"
 export const LINK_GET_USER_BY_ID = baseUrl + "/get/user-id="
 export const LINK_GET_CREDENTIALS_ID = baseUrl + "/get/credentials-id/user-id="

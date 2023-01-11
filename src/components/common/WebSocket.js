@@ -1,7 +1,7 @@
 import React from 'react';
 import SockJsClient from 'react-stomp'
 
-const SOCKET_URL = 'http://20.170.66.16:7900/ws-message';
+const SOCKET_URL = 'http://20.52.204.186:7900/ws-message';
 // const SOCKET_URL = 'http://localhost:7901/ws-message';
 
 /**
